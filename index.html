@@ -1466,5 +1466,57 @@
       }, 3000);
     }
   </script>
+  <script>
+/**
+ * Scroll reveal helper using IntersectionObserver.
+ * Place this inline just before </body> in index.html.
+ * It will add the "active" class to elements with class "scroll-reveal"
+ * as they come into view, triggering your existing CSS animations.
+ */
+(function () {
+  function initScrollReveal() {
+    const revealItems = document.querySelectorAll('.scroll-reveal');
+
+    if (!revealItems.length) return;
+
+    // If IntersectionObserver is supported, use it.
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          // Support optional per-element delay via data-sr-delay (e.g. data-sr-delay="150ms")
+          const delay = entry.target.dataset.srDelay;
+          if (delay) {
+            entry.target.style.transitionDelay = delay;
+          }
+
+          entry.target.classList.add('active');
+
+          // Stop observing once revealed to avoid repeated toggles
+          obs.unobserve(entry.target);
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -8% 0px', // reveal a bit before fully in view
+        threshold: 0.12
+      });
+
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      // Fallback for older browsers: reveal all immediately
+      revealItems.forEach(item => item.classList.add('active'));
+    }
+  }
+
+  // Wait for DOM ready before initializing
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollReveal);
+  } else {
+    initScrollReveal();
+  }
+})();
+</script>
 </body>
+  
 </html>
