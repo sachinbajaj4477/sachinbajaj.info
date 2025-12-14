@@ -2,77 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sachin Bajaj – Data & AI Engineer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
         content="Sachin Bajaj – Data & AI Engineer from Bengaluru, India, turning complex data into actionable insights using Machine Learning, AI, and Data Analytics.">
+  <meta name="theme-color" content="#050816" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Sachin Bajaj – Data & AI Engineer | AI Solutions & Automation</title>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     :root {
-      --bg: #050816;
-      --bg-alt: #0b1030;
-      --card: #111827;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.15);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border: #1f2933;
-      --danger: #ef4444;
-      --success: #10b981;
+      --bg: #0d0221;
+      --bg-alt: #1a0435;
+      --card: #150a29;
+      --accent: #00d9ff;
+      --accent-soft: rgba(0, 217, 255, 0.15);
+      --text: #f0f4f8;
+      --muted: #a3b8d4;
+      --border: #2d1b4e;
       --radius-lg: 18px;
       --radius-md: 10px;
-      --shadow-soft: 0 18px 40px rgba(0,0,0,0.45);
-      --shadow-subtle: 0 10px 24px rgba(15,23,42,0.7);
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+      --shadow-subtle: 0 10px 24px rgba(15, 23, 42, 0.7);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #172554 0, #020617 55%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 20% 50%, #2d1b4e 0, #0d0221 40%, #0a0015 100%);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
+    a:hover { color: #7dd3fc; }
 
-    a:hover {
-      color: #7dd3fc;
-    }
-
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 24px 16px 64px;
-    }
-
+    /* Header */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 4px 24px;
+      padding: 12px 20px;
       position: sticky;
       top: 0;
       z-index: 30;
       backdrop-filter: blur(16px);
       background: linear-gradient(to bottom,
-        rgba(15,23,42,0.96),
-        rgba(15,23,42,0.75),
+        rgba(13, 2, 33, 0.96),
+        rgba(26, 4, 53, 0.75),
         transparent
       );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      transition: all 0.3s ease;
     }
 
     .logo {
@@ -83,17 +68,14 @@
       transition: transform 0.2s ease;
     }
 
-    .logo:hover {
-      transform: scale(1.02);
-    }
+    .logo:hover { transform: scale(1.02); }
 
     .logo-circle {
       width: 34px;
       height: 34px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #38bdf8, #0ea5e9 40%, #0b1120 100%);
-      box-shadow: 0 0 0 1px rgba(148,163,184,0.3),
-                  0 0 32px rgba(56,189,248,0.8);
+      background: radial-gradient(circle at 30% 20%, #00d9ff, #a855f7 60%, #0d0221 100%);
+      box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.5), 0 0 32px rgba(0, 217, 255, 0.9), 0 0 60px rgba(168, 85, 247, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -120,6 +102,16 @@
       letter-spacing: 0.16em;
     }
 
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 40;
+    }
+
     nav {
       display: flex;
       gap: 18px;
@@ -135,12 +127,10 @@
       transition: color 0.2s ease;
     }
 
-    nav a.active {
-      color: var(--text);
-    }
+    nav a.active { color: var(--text); }
 
     nav a::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       bottom: 0;
@@ -151,13 +141,32 @@
       transition: width 0.3s ease;
     }
 
-    nav a:hover {
-      color: var(--text);
+    nav a:hover, nav a.active::after {
+      width: 100%;
     }
 
-    nav a:hover::after,
-    nav a.active::after {
-      width: 100%;
+    /* Theme Toggle */
+    .theme-toggle {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    /* Page */
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
     }
 
     /* Hero */
@@ -169,27 +178,18 @@
       margin-top: 16px;
       padding: 24px 20px;
       border-radius: 24px;
-      background: radial-gradient(circle at top left, #1f2937 0, #020617 50%);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148,163,184,0.18);
+      background: radial-gradient(circle at top left, #1a0435 0, #0d0221 50%);
+      box-shadow: 0 18px 40px rgba(0, 217, 255, 0.1), 0 0 80px rgba(168, 85, 247, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.25);
       animation: fadeInUp 0.6s ease-out;
     }
 
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-main {
-      position: relative;
-      padding-right: 10px;
-    }
+    .hero-main { position: relative; padding-right: 10px; }
 
     .badge {
       display: inline-flex;
@@ -197,8 +197,8 @@
       gap: 8px;
       padding: 4px 11px 4px 4px;
       border-radius: 999px;
-      border: 1px solid rgba(56,189,248,0.4);
-      background: radial-gradient(circle at left, rgba(56,189,248,0.25), rgba(15,23,42,0.4));
+      border: 1px solid rgba(0, 217, 255, 0.5);
+      background: radial-gradient(circle at left, rgba(0, 217, 255, 0.25), rgba(26, 4, 53, 0.5));
       color: var(--text);
       font-size: 11px;
       letter-spacing: 0.16em;
@@ -208,14 +208,8 @@
     }
 
     @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .badge-dot {
@@ -223,17 +217,13 @@
       height: 10px;
       border-radius: 999px;
       background: radial-gradient(circle, #22c55e, #16a34a);
-      box-shadow: 0 0 0 4px rgba(34,197,94,0.3);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
       animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
     @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
-      }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     .hero-title {
@@ -241,13 +231,23 @@
       line-height: 1.1;
       letter-spacing: 0.02em;
       margin-bottom: 10px;
+      min-height: 100px;
     }
 
-    .hero-title span {
-      background: linear-gradient(to right, #38bdf8, #a855f7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .hero-title span { background: linear-gradient(135deg, #00d9ff, #a855f7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: var(--accent);
+      margin-left: 4px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
     }
 
     .hero-subtitle {
@@ -270,14 +270,25 @@
     .hero-highlight span {
       padding: 4px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
       transition: all 0.2s ease;
+      animation: slideInDown 0.5s ease-out both;
+    }
+
+    .hero-highlight span:nth-child(1) { animation-delay: 0.1s; }
+    .hero-highlight span:nth-child(2) { animation-delay: 0.2s; }
+    .hero-highlight span:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes slideInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero-highlight span:hover {
       border-color: var(--accent);
-      background: rgba(56,189,248,0.1);
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateY(-2px);
     }
 
     .hero-actions {
@@ -287,8 +298,7 @@
       margin-bottom: 18px;
     }
 
-    .btn-primary,
-    .btn-ghost {
+    .btn-primary, .btn-ghost {
       border-radius: 999px;
       padding: 9px 18px;
       font-size: 13px;
@@ -304,35 +314,29 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-      color: #0b1120;
-      box-shadow: 0 12px 30px rgba(8,47,73,0.9);
+      background: linear-gradient(135deg, #00d9ff, #a855f7);
+      color: #0d0221;
+      box-shadow: 0 12px 30px rgba(0, 217, 255, 0.6), 0 0 20px rgba(168, 85, 247, 0.4);
       font-weight: 600;
     }
 
-    .btn-primary span {
-      font-size: 16px;
-    }
-
     .btn-primary:hover {
-      filter: brightness(1.1);
+      filter: brightness(1.15);
       transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(8,47,73,1);
+      box-shadow: 0 18px 50px rgba(0, 217, 255, 0.7), 0 0 30px rgba(168, 85, 247, 0.5);
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
-    }
+    .btn-primary:active { transform: translateY(0); }
 
     .btn-ghost {
-      background: rgba(15,23,42,0.85);
-      border-color: rgba(148,163,184,0.4);
+      background: rgba(13, 2, 33, 0.85);
+      border-color: rgba(0, 217, 255, 0.4);
       color: var(--text);
     }
 
     .btn-ghost:hover {
       border-color: var(--accent);
-      background: rgba(56,189,248,0.1);
+      background: rgba(0, 217, 255, 0.1);
       transform: translateY(-2px);
     }
 
@@ -341,12 +345,9 @@
       color: var(--muted);
     }
 
-    .hero-contact a {
-      color: var(--accent);
-      font-weight: 500;
-    }
+    .hero-contact a { color: var(--accent); font-weight: 500; }
 
-    /* Hero right panel */
+    /* Hero Visual */
     .hero-visual {
       position: relative;
       min-height: 260px;
@@ -354,40 +355,28 @@
     }
 
     @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .hero-card {
       position: relative;
       height: 100%;
       border-radius: 24px;
-      background: radial-gradient(circle at top, rgba(56,189,248,0.18), rgba(15,23,42,0.95));
-      box-shadow: var(--shadow-subtle);
-      border: 1px solid rgba(148,163,184,0.28);
+      background: radial-gradient(circle at top, rgba(0, 217, 255, 0.12), rgba(13, 2, 33, 0.95));
+      box-shadow: 0 10px 24px rgba(168, 85, 247, 0.15), 0 0 60px rgba(0, 217, 255, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.3);
       padding: 18px 18px 16px;
       overflow: hidden;
       transition: all 0.3s ease;
     }
 
     .hero-card:hover {
-      border-color: rgba(56,189,248,0.5);
-      box-shadow: 0 10px 24px rgba(56,189,248,0.15);
+      border-color: rgba(0, 217, 255, 0.6);
+      box-shadow: 0 18px 40px rgba(0, 217, 255, 0.25), 0 0 80px rgba(168, 85, 247, 0.15);
     }
 
-    .hero-tag {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
+    .hero-tag { font-size: 11px; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 8px; }
 
     .hero-mainline {
       font-size: 20px;
@@ -396,9 +385,7 @@
       margin-bottom: 8px;
     }
 
-    .hero-mainline span {
-      color: #38bdf8;
-    }
+    .hero-mainline span { color: #38bdf8; }
 
     .hero-kicker {
       font-size: 12px;
@@ -418,15 +405,15 @@
     .stat-card {
       padding: 8px 9px;
       border-radius: 14px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.28);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.28);
       font-size: 11px;
       transition: all 0.2s ease;
     }
 
     .stat-card:hover {
       border-color: var(--accent);
-      background: rgba(56,189,248,0.08);
+      background: rgba(56, 189, 248, 0.08);
     }
 
     .stat-label {
@@ -442,6 +429,11 @@
       font-size: 12px;
     }
 
+    .counter {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
     .hero-chips {
       display: flex;
       flex-wrap: wrap;
@@ -453,14 +445,14 @@
     .hero-chips span {
       padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.3);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.3);
       transition: all 0.2s ease;
     }
 
     .hero-chips span:hover {
       border-color: var(--accent);
-      background: rgba(56,189,248,0.1);
+      background: rgba(56, 189, 248, 0.1);
     }
 
     .hero-footer-note {
@@ -484,7 +476,7 @@
       width: 140px;
       height: 140px;
       border-radius: 999px;
-      border: 1px dashed rgba(148,163,184,0.5);
+      border: 1px dashed rgba(0, 217, 255, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -493,20 +485,16 @@
     }
 
     @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .orbit-core {
       width: 46px;
       height: 46px;
       border-radius: 999px;
-      background: radial-gradient(circle, #38bdf8, #0f172a);
-      box-shadow: 0 0 32px rgba(56,189,248,0.7);
+      background: radial-gradient(circle, #00d9ff, #0d0221);
+      box-shadow: 0 0 32px rgba(0, 217, 255, 0.8), 0 0 60px rgba(168, 85, 247, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -520,18 +508,21 @@
       width: 26px;
       height: 26px;
       border-radius: 999px;
-      background: #020617;
-      border: 1px solid rgba(148,163,184,0.7);
+      background: #0d0221;
+      border: 1px solid rgba(0, 217, 255, 0.6);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 11px;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .orbit-node:hover {
-      border-color: var(--accent);
-      background: rgba(56,189,248,0.15);
+      border-color: #a855f7;
+      background: rgba(168, 85, 247, 0.2);
+      transform: scale(1.15);
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.4), 0 0 25px rgba(168, 85, 247, 0.3);
     }
 
     .orbit-node:nth-child(2) { top: -10px; left: 50%; transform: translateX(-50%); }
@@ -546,12 +537,8 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .section-label {
@@ -578,33 +565,31 @@
       background: var(--card);
       border-radius: var(--radius-lg);
       padding: 16px 16px 14px;
-      border: 1px solid rgba(148,163,184,0.2);
-      box-shadow: 0 12px 28px rgba(15,23,42,0.9);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      box-shadow: 0 12px 28px rgba(13, 2, 33, 0.8), 0 0 40px rgba(168, 85, 247, 0.05);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
     }
 
     .card::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(56,189,248,0.1), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
       transition: left 0.5s ease;
     }
 
     .card:hover {
-      border-color: rgba(56,189,248,0.4);
-      box-shadow: 0 18px 40px rgba(56,189,248,0.15);
+      border-color: rgba(0, 217, 255, 0.5);
+      box-shadow: 0 18px 40px rgba(0, 217, 255, 0.2), 0 0 60px rgba(168, 85, 247, 0.1);
       transform: translateY(-2px);
     }
 
-    .card:hover::before {
-      left: 100%;
-    }
+    .card:hover::before { left: 100%; }
 
     .card h3 {
       font-size: 15px;
@@ -630,8 +615,8 @@
     .pill {
       padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(13, 2, 33, 0.9);
+      border: 1px solid rgba(0, 217, 255, 0.3);
       font-size: 11px;
       color: var(--muted);
       transition: all 0.2s ease;
@@ -640,8 +625,9 @@
 
     .pill:hover {
       border-color: var(--accent);
-      background: rgba(56,189,248,0.1);
+      background: rgba(0, 217, 255, 0.12);
       color: var(--accent);
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
     }
 
     .list {
@@ -659,7 +645,7 @@
     }
 
     .list li::before {
-      content: "→";
+      content: '→';
       position: absolute;
       left: 0;
       color: var(--accent);
@@ -668,10 +654,6 @@
     }
 
     /* Skills Section */
-    .skills-section {
-      margin-top: 36px;
-    }
-
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -679,8 +661,8 @@
     }
 
     .skill-card {
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.2);
+      background: rgba(13, 2, 33, 0.9);
+      border: 1px solid rgba(0, 217, 255, 0.2);
       border-radius: 12px;
       padding: 12px;
       text-align: center;
@@ -690,22 +672,16 @@
 
     .skill-card:hover {
       border-color: var(--accent);
-      background: rgba(56,189,248,0.08);
+      background: rgba(0, 217, 255, 0.1);
       transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.2), 0 0 40px rgba(168, 85, 247, 0.1);
     }
 
-    .skill-name {
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
+    .skill-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
 
-    .skill-level {
-      font-size: 11px;
-      color: var(--muted);
-    }
+    .skill-level { font-size: 11px; color: var(--muted); }
 
-    /* Testimonials Section */
+    /* Testimonials */
     .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -716,13 +692,13 @@
       background: var(--card);
       border-radius: var(--radius-lg);
       padding: 16px;
-      border: 1px solid rgba(148,163,184,0.2);
+      border: 1px solid rgba(0, 217, 255, 0.2);
       transition: all 0.3s ease;
     }
 
     .testimonial-card:hover {
-      border-color: rgba(56,189,248,0.4);
-      box-shadow: 0 18px 40px rgba(56,189,248,0.15);
+      border-color: rgba(0, 217, 255, 0.5);
+      box-shadow: 0 18px 40px rgba(0, 217, 255, 0.2), 0 0 60px rgba(168, 85, 247, 0.1);
     }
 
     .testimonial-text {
@@ -732,15 +708,78 @@
       line-height: 1.7;
     }
 
-    .testimonial-author {
+    .testimonial-author { font-size: 12px; font-weight: 500; color: var(--text); }
+
+    .testimonial-role { font-size: 11px; color: var(--muted); }
+
+    /* Contact Form */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
       font-size: 12px;
       font-weight: 500;
+      margin-bottom: 6px;
       color: var(--text);
     }
 
-    .testimonial-role {
-      font-size: 11px;
-      color: var(--muted);
+    .form-group input, .form-group textarea {
+      padding: 10px 12px;
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 8px;
+      background: rgba(13, 2, 33, 0.9);
+      color: var(--text);
+      font-size: 13px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2), 0 0 15px rgba(0, 217, 255, 0.15);
+    }
+
+    .form-submit {
+      background: linear-gradient(135deg, #00d9ff, #a855f7);
+      color: #0d0221;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 13px;
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4), 0 0 40px rgba(168, 85, 247, 0.3);
+    }
+
+    .form-submit:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.6), 0 0 60px rgba(168, 85, 247, 0.4);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      color: #22c55e;
+      font-size: 13px;
+      z-index: 1000;
+      animation: slideInToast 0.3s ease-out;
+    }
+
+    @keyframes slideInToast {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     /* Footer */
@@ -752,7 +791,7 @@
       flex-wrap: wrap;
       gap: 8px;
       justify-content: space-between;
-      border-top: 1px solid rgba(31,41,55,0.8);
+      border-top: 1px solid rgba(31, 41, 55, 0.8);
       padding-top: 14px;
     }
 
@@ -767,11 +806,9 @@
       transition: color 0.2s ease;
     }
 
-    .footer-links a:hover {
-      color: var(--accent);
-    }
+    .footer-links a:hover { color: var(--accent); }
 
-    /* Scroll reveal animation */
+    /* Scroll Reveal */
     .scroll-reveal {
       opacity: 0;
       transform: translateY(20px);
@@ -785,57 +822,95 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      .hero-visual {
-        order: -1;
-      }
-      .section-grid {
-        grid-template-columns: 1fr;
-      }
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { order: -1; }
+      .section-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
       header {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-wrap: wrap;
         gap: 10px;
-        padding-bottom: 12px;
       }
+
+      .nav-toggle {
+        display: block;
+      }
+
       nav {
-        font-size: 11px;
-        gap: 12px;
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 8px;
+        background: rgba(15, 23, 42, 0.95);
+        padding: 16px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
       }
-      .page {
-        padding-inline: 14px;
+
+      nav.active {
+        display: flex;
       }
-      .hero {
-        padding: 18px 14px;
+
+      .page { padding-inline: 14px; }
+      .hero { padding: 18px 14px; }
+      .skills-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-orbit { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .logo-text span:first-child {
+        font-size: 12px;
       }
-      .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      .logo-text span:last-child {
+        font-size: 10px;
       }
     }
 
     @media (max-width: 520px) {
-      .hero-stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .hero-orbit {
-        display: none;
-      }
-      nav {
-        flex-direction: column;
-        gap: 8px;
-      }
-      .hero-actions {
-        flex-direction: column;
-      }
-      .btn-primary,
-      .btn-ghost {
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-ghost {
         width: 100%;
         justify-content: center;
+      }
+      .section-grid { grid-template-columns: 1fr; }
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+      .page {
+        padding: 16px 12px 48px;
+      }
+      header {
+        padding: 10px 16px;
+      }
+      .hero {
+        padding: 16px 12px;
+      }
+      .form-group input, .form-group textarea {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-title {
+        font-size: clamp(1.8rem, 3vw, 2.2rem);
+        min-height: 80px;
+      }
+      .badge {
+        font-size: 10px;
+        padding: 3px 9px 3px 3px;
+      }
+      .section-title {
+        font-size: 18px;
+      }
+      .card {
+        padding: 12px;
+      }
+      .hero-subtitle {
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -847,19 +922,20 @@
         <div class="logo-circle">SB</div>
         <div class="logo-text">
           <span>Sachin Bajaj</span>
-          <span>Data &amp; AI Engineer</span>
+          <span>Data & AI Engineer</span>
         </div>
       </div>
-      <nav>
+      <nav id="nav-menu">
         <a href="#about" class="nav-link">About</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#highlights" class="nav-link">Highlights</a>
         <a href="#testimonials" class="nav-link">Testimonials</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
+      <button class="nav-toggle" id="nav-toggle">☰</button>
+      <button class="theme-toggle" id="theme-toggle">🌙</button>
     </header>
 
-    <!-- Hero -->
     <main>
       <section class="hero" id="top">
         <div class="hero-main">
@@ -869,20 +945,20 @@
           </div>
 
           <h1 class="hero-title">
-            Hi, I'm <span>Sachin Bajaj</span>
+            Hi, I'm <span id="typing-text">Sachin Bajaj</span><span class="typing-cursor"></span>
           </h1>
           <p class="hero-subtitle">
-            A Data &amp; AI Engineer based in Bengaluru, India, turning complex data into practical, measurable business outcomes through machine learning, AI, and analytics-driven automation.
+            A Data & AI Engineer based in Bengaluru, India, turning complex data into practical, measurable business outcomes through machine learning, AI, and analytics-driven automation.
           </p>
 
           <div class="hero-highlight">
-            <span>Data &amp; AI Engineering</span>
-            <span>Machine Learning &amp; NLP</span>
-            <span>Automation &amp; Cloud Analytics</span>
+            <span>Data & AI Engineering</span>
+            <span>Machine Learning & NLP</span>
+            <span>Automation & Cloud Analytics</span>
           </div>
 
           <div class="hero-actions">
-            <a class="btn-primary" href="mailto:sachin@sachinbajaj.info">
+            <a class="btn-primary" href="#contact">
               <span>✉</span>
               Contact Me
             </a>
@@ -900,7 +976,7 @@
           <div class="hero-card">
             <div class="hero-tag">Turning data into impact</div>
             <div class="hero-mainline">
-              Autonomous <span>AI</span> &amp; <span>analytics</span> solutions for modern businesses
+              Autonomous <span>AI</span> & <span>analytics</span> solutions for modern businesses
             </div>
             <div class="hero-kicker">
               Blending machine learning, NLP, and automation to build intelligent systems that scale across industries.
@@ -908,16 +984,16 @@
 
             <div class="hero-stats">
               <div class="stat-card">
-                <div class="stat-label">Focus</div>
-                <div class="stat-value">AI Engineering</div>
+                <div class="stat-label">Projects</div>
+                <div class="stat-value"><span class="counter">15+</span></div>
               </div>
               <div class="stat-card">
-                <div class="stat-label">Strengths</div>
-                <div class="stat-value">ML · NLP · Automation</div>
+                <div class="stat-label">Clients</div>
+                <div class="stat-value"><span class="counter">8+</span></div>
               </div>
               <div class="stat-card">
-                <div class="stat-label">Location</div>
-                <div class="stat-value">Bengaluru, India</div>
+                <div class="stat-label">Years</div>
+                <div class="stat-value"><span class="counter">1.5+</span></div>
               </div>
             </div>
 
@@ -934,28 +1010,27 @@
             <div class="hero-orbit">
               <div class="orbit-ring">
                 <div class="orbit-core">
-                  Data → AI → Decisions
+                  Data → AI
                 </div>
-                <div class="orbit-node">ML</div>
-                <div class="orbit-node">NLP</div>
-                <div class="orbit-node">Cloud</div>
-                <div class="orbit-node">Automation</div>
+                <div class="orbit-node" onclick="this.textContent = 'ML++'">ML</div>
+                <div class="orbit-node" onclick="this.textContent = 'NLP++">NLP</div>
+                <div class="orbit-node" onclick="this.textContent = 'Cloud++">Cloud</div>
+                <div class="orbit-node" onclick="this.textContent = 'Auto++">Auto</div>
               </div>
             </div>
           </div>
         </aside>
       </section>
 
-      <!-- About -->
       <section id="about" class="scroll-reveal">
         <div class="section-label">About</div>
-        <h2 class="section-title">Data &amp; AI Specialist</h2>
+        <h2 class="section-title">Data & AI Specialist</h2>
 
         <div class="section-grid">
           <div class="card">
             <h3>From raw data to real-world outcomes</h3>
             <p>
-              A Data &amp; AI Specialist with experience in building predictive models, NLP systems, and automation pipelines that streamline decision-making across domains.
+              A Data & AI Specialist with experience in building predictive models, NLP systems, and automation pipelines that streamline decision-making across domains.
             </p>
             <p style="margin-top: 6px;">
               The focus is on combining artificial intelligence with analytics foundations to deliver scalable, production-ready solutions that directly support business strategy.
@@ -980,10 +1055,9 @@
         </div>
       </section>
 
-      <!-- Skills -->
       <section id="skills" class="scroll-reveal">
         <div class="section-label">Technical Arsenal</div>
-        <h2 class="section-title">Core Skills &amp; Expertise</h2>
+        <h2 class="section-title">Core Skills & Expertise</h2>
 
         <div class="skills-grid">
           <div class="skill-card">
@@ -995,7 +1069,7 @@
             <div class="skill-level">Advanced</div>
           </div>
           <div class="skill-card">
-            <div class="skill-name">NLP &amp; LLMs</div>
+            <div class="skill-name">NLP & LLMs</div>
             <div class="skill-level">Advanced</div>
           </div>
           <div class="skill-card">
@@ -1003,11 +1077,11 @@
             <div class="skill-level">Expert</div>
           </div>
           <div class="skill-card">
-            <div class="skill-name">SQL &amp; Databases</div>
+            <div class="skill-name">SQL & Databases</div>
             <div class="skill-level">Advanced</div>
           </div>
           <div class="skill-card">
-            <div class="skill-name">GCP &amp; Cloud</div>
+            <div class="skill-name">GCP & Cloud</div>
             <div class="skill-level">Advanced</div>
           </div>
           <div class="skill-card">
@@ -1027,7 +1101,7 @@
             <div class="skill-level">Advanced</div>
           </div>
           <div class="skill-card">
-            <div class="skill-name">Zapier &amp; Make</div>
+            <div class="skill-name">Zapier & Make</div>
             <div class="skill-level">Advanced</div>
           </div>
           <div class="skill-card">
@@ -1037,14 +1111,13 @@
         </div>
       </section>
 
-      <!-- Highlights -->
       <section id="highlights" class="scroll-reveal">
         <div class="section-label">Innovation Highlights</div>
         <h2 class="section-title">Selected AI initiatives</h2>
 
         <div class="section-grid">
           <div class="card">
-            <h3>Autonomous AI Receptionist for Voice Calls</h3>
+            <h3>🎙️ Autonomous AI Receptionist for Voice Calls</h3>
             <p>
               An intelligent receptionist that answers and handles voice calls end-to-end, using conversational AI to route queries, capture information, and support users without human intervention.
             </p>
@@ -1057,7 +1130,7 @@
           </div>
 
           <div class="card">
-            <h3>FoodTech AI Chatbot</h3>
+            <h3>🍔 FoodTech AI Chatbot</h3>
             <p>
               A specialized chatbot built for FoodTech use cases, answering product, menu, and operations-related questions while integrating with backend data to provide context-aware responses.
             </p>
@@ -1069,7 +1142,7 @@
           </div>
 
           <div class="card">
-            <h3>Intelligent Workflow Automation</h3>
+            <h3>⚙️ Intelligent Workflow Automation</h3>
             <p>
               End-to-end automation pipelines that integrate multiple systems, reduce manual effort by 80%+, and enable data-driven decision-making at scale across business operations.
             </p>
@@ -1081,7 +1154,7 @@
           </div>
 
           <div class="card">
-            <h3>Predictive Analytics &amp; Forecasting</h3>
+            <h3>📊 Predictive Analytics & Forecasting</h3>
             <p>
               Built advanced ML models for forecasting, anomaly detection, and pattern recognition that directly improved business KPIs and operational efficiency.
             </p>
@@ -1093,7 +1166,7 @@
           </div>
 
           <div class="card">
-            <h3>Blinkit Data Analysis with PowerBI</h3>
+            <h3>📱 Blinkit Data Analysis with PowerBI</h3>
             <p>
               Comprehensive data analysis project analyzing Blinkit's operational metrics, delivery patterns, and customer behavior using advanced visualization techniques in PowerBI.
             </p>
@@ -1101,7 +1174,6 @@
               <span class="pill">PowerBI</span>
               <span class="pill">Data Visualization</span>
               <span class="pill">E-commerce Analytics</span>
-              <span class="pill">Business Insights</span>
             </div>
             <p style="margin-top: 8px; font-size: 12px;">
               <a href="https://github.com/sachinbajaj4477/Blinkit-Data-Analysis" target="_blank" rel="noreferrer" style="color: var(--accent); text-decoration: underline;">View on GitHub →</a>
@@ -1110,10 +1182,9 @@
         </div>
       </section>
 
-      <!-- Testimonials -->
       <section id="testimonials" class="scroll-reveal">
         <div class="section-label">What People Say</div>
-        <h2 class="section-title">Client &amp; Colleague Feedback</h2>
+        <h2 class="section-title">Colleague Feedback</h2>
 
         <div class="testimonial-grid">
           <div class="testimonial-card">
@@ -1121,15 +1192,7 @@
               "Sachin's AI solutions have transformed our operational efficiency. His expertise in automation and data engineering is exceptional. Highly recommended for any data-intensive project."
             </div>
             <div class="testimonial-author">Santosh Aluwala</div>
-            <div class="testimonial-role">CEO &amp; Founder, Forgensys</div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="testimonial-text">
-              "Working with Sachin on our customer success initiatives was excellent. His ability to translate complex requirements into elegant, scalable solutions is outstanding."
-            </div>
-            <div class="testimonial-author">Sanjuktha Babu</div>
-            <div class="testimonial-role">CSM, Skope Kitchens</div>
+            <div class="testimonial-role">CEO & Founder, Forgensys</div>
           </div>
 
           <div class="testimonial-card">
@@ -1137,53 +1200,11 @@
               "His data analysis and visualization capabilities are top-tier. The insights generated from his work directly drove business decisions and improved our KPIs significantly."
             </div>
             <div class="testimonial-author">Priya Sharma</div>
-            <div class="testimonial-role">Founder, Analytics-Driven Startup</div>
+            <div class="testimonial-role">Senior Analytics Lead</div>
           </div>
         </div>
       </section>
 
-      <!-- Projects / Links -->
-      <section id="projects" class="scroll-reveal">
-        <div class="section-label">Projects &amp; presence</div>
-        <h2 class="section-title">Where to explore more</h2>
-
-        <div class="section-grid">
-          <div class="card">
-            <h3>Professional presence</h3>
-            <ul class="list">
-              <li>
-                <strong>LinkedIn:</strong>
-                <a href="https://www.linkedin.com/in/sachin-bajaj-data/" target="_blank" rel="noreferrer">
-                  linkedin.com/in/sachin-bajaj-data
-                </a>
-              </li>
-              <li>
-                <strong>Instagram:</strong>
-                <a href="https://www.instagram.com/sachin_bajaj__/" target="_blank" rel="noreferrer">
-                  @sachin_bajaj__
-                </a>
-              </li>
-              <li>
-                <strong>Resume (PDF):</strong>
-                <a href="https://drive.google.com/file/d/1Mg5u0c2_dK-kAMmPjvTx2qC2tPQ0motf/view?usp=sharing" target="_blank" rel="noreferrer">
-                  View detailed CV
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>What you get by working together</h3>
-            <ul class="list">
-              <li>End-to-end collaboration from data exploration to AI deployment.</li>
-              <li>Focus on measurable impact and operational efficiency, not just models.</li>
-              <li>Clear communication with both technical and business stakeholders.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
       <section id="contact" class="scroll-reveal">
         <div class="section-label">Contact</div>
         <h2 class="section-title">Let's build intelligent systems</h2>
@@ -1191,24 +1212,36 @@
         <div class="section-grid">
           <div class="card">
             <h3>Reach out directly</h3>
-            <p>Email: <a href="mailto:sachin@sachinbajaj.info">sachin@sachinbajaj.info</a></p>
-            <p>Phone: <a href="tel:+917220044772">+91-7220044772</a></p>
-            <p style="margin-top: 8px;">
-              Open to roles, collaborations, and consulting engagements in Data &amp; AI Engineering, machine learning, and automation.
-            </p>
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" placeholder="Your message..." required></textarea>
+              </div>
+              <button type="submit" class="form-submit">Send Message</button>
+            </form>
           </div>
 
           <div class="card">
             <h3>Quick links</h3>
-            <div class="pill-row">
+            <p>Email: <a href="mailto:sachin@sachinbajaj.info">sachin@sachinbajaj.info</a></p>
+            <p>Phone: <a href="tel:+917220044772">+91-7220044772</a></p>
+            <p style="margin-top: 8px;">
+              Open to roles, collaborations, and consulting engagements in Data & AI Engineering, machine learning, and automation.
+            </p>
+            <div class="pill-row" style="margin-top: 12px;">
               <a class="pill" href="https://www.linkedin.com/in/sachin-bajaj-data/" target="_blank" rel="noreferrer">
                 LinkedIn Profile
               </a>
               <a class="pill" href="https://www.instagram.com/sachin_bajaj__/" target="_blank" rel="noreferrer">
                 Instagram
-              </a>
-              <a class="pill" href="https://drive.google.com/file/d/1Mg5u0c2_dK-kAMmPjvTx2qC2tPQ0motf/view?usp=sharing" target="_blank" rel="noreferrer">
-                Download Resume
               </a>
             </div>
           </div>
@@ -1217,35 +1250,118 @@
     </main>
 
     <footer>
-      <span>© <span id="year"></span> Sachin Bajaj · Data &amp; AI Engineer</span>
+      <span>© <span id="year"></span> Sachin Bajaj · Data & AI Engineer</span>
       <div class="footer-links">
         <a href="#top">Back to top</a>
       </div>
     </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
   <script>
-    // Set current year
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // EmailJS Configuration - YOUR CREDENTIALS
+    emailjs.init('Gkw0Kha92hIfz3w37');
+    const SERVICE_ID = 'service_9pr0ycj';
+    const TEMPLATE_ID = 'template_9se5dnd';
 
-    // Smooth scroll navigation
-    const navLinks = document.querySelectorAll(".nav-link");
-    const sections = document.querySelectorAll("section");
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Typing effect
+    const typingText = document.getElementById('typing-text');
+    const words = ['Sachin Bajaj', 'an AI Engineer', 'a Data Specialist', 'an Innovator'];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+      const currentWord = words[wordIndex];
+      if (isDeleting) {
+        charIndex--;
+      } else {
+        charIndex++;
+      }
+
+      typingText.textContent = currentWord.substring(0, charIndex);
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        setTimeout(() => { isDeleting = true; }, 1500);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+      }
+
+      const speed = isDeleting ? 50 : 100;
+      setTimeout(typeEffect, speed);
+    }
+
+    typeEffect();
+
+    // Counter animation
+    function animateCounter(element) {
+      const text = element.textContent;
+      const isDecimal = text.includes('.');
+      const num = isDecimal ? parseFloat(text) : parseInt(text);
+      const increment = isDecimal ? 0.1 : Math.ceil(num / 20);
+      let current = 0;
+
+      const counter = setInterval(() => {
+        current += increment;
+        if (current >= num) {
+          element.textContent = text;
+          clearInterval(counter);
+        } else {
+          const display = isDecimal ? current.toFixed(1) : Math.floor(current);
+          element.textContent = display + '+';
+        }
+      }, 50);
+    }
+
+    const observers = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = true;
+          animateCounter(entry.target);
+        }
+      });
+    });
+
+    observers.forEach((obs) => counterObserver.observe(obs));
+
+    // Navigation active state
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
 
     const observerOptions = {
       threshold: 0.3,
-      rootMargin: "0px 0px -30% 0px"
+      rootMargin: '0px 0px -30% 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          navLinks.forEach((link) => link.classList.remove("active"));
+          navLinks.forEach((link) => link.classList.remove('active'));
           const activeLink = document.querySelector(
             `a[href="#${entry.target.id}"]`
           );
           if (activeLink) {
-            activeLink.classList.add("active");
+            activeLink.classList.add('active');
           }
         }
       });
@@ -1254,17 +1370,17 @@
     sections.forEach((section) => observer.observe(section));
 
     // Scroll reveal animation
-    const revealElements = document.querySelectorAll(".scroll-reveal");
+    const revealElements = document.querySelectorAll('.scroll-reveal');
 
     const revealObserverOptions = {
       threshold: 0.15,
-      rootMargin: "0px 0px -50px 0px"
+      rootMargin: '0px 0px -50px 0px'
     };
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("active");
+          entry.target.classList.add('active');
           revealObserver.unobserve(entry.target);
         }
       });
@@ -1272,22 +1388,83 @@
 
     revealElements.forEach((element) => revealObserver.observe(element));
 
-    // Add smooth scroll behavior
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
-        const href = this.getAttribute("href");
-        if (href !== "#" && href !== "#top") {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href !== '#top') {
           e.preventDefault();
           const target = document.querySelector(href);
           if (target) {
             target.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
+              behavior: 'smooth',
+              block: 'start'
             });
           }
         }
       });
     });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    setTheme(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const current = localStorage.getItem('theme') || 'dark';
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+    });
+
+    // Contact form with EmailJS
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      try {
+        // Send via EmailJS
+        const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+          from_name: name,
+          from_email: email,
+          message: message,
+          to_email: 'sachin@sachinbajaj.info'
+        });
+
+        if (response.status === 200) {
+          showToast('✅ Message sent successfully! I\'ll get back to you soon.');
+          contactForm.reset();
+        } else {
+          showToast('❌ Error sending message. Please try again.');
+        }
+      } catch (error) {
+        showToast('❌ Connection error. Please try again.');
+        console.error('EmailJS Error:', error);
+      }
+    });
+
+    // Toast notification
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'slideInToast 0.3s ease-out reverse';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
   </script>
 </body>
 </html>
