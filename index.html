@@ -1263,7 +1263,34 @@
     emailjs.init('Gkw0Kha92hIfz3w37');
     const SERVICE_ID = 'service_9pr0ycj';
     const TEMPLATE_ID = 'template_9se5dnd';
+    // Contact form handler
+const contactForm = document.getElementById("contact-form");
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  try {
+    const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      from_name: name,
+      from_email: email,
+      message: message,
+      to_email: "sachin@sachinbajaj.info",
+    });
+
+    if (response.status === 200) {
+      showToast("✅ Message sent successfully! I’ll get back to you soon.");
+      contactForm.reset();
+    } else {
+      showToast("❌ Error sending message. Please try again.");
+    }
+  } catch (error) {
+    showToast("❌ Connection error. Please try again.");
+    console.error("EmailJS Error:", error);
+  }
+});
     // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
