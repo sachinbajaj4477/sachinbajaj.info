@@ -1,1551 +1,454 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-        content="Sachin Bajaj – Data & AI Engineer from Bengaluru, India, turning complex data into actionable insights using Machine Learning, AI, and Data Analytics.">
-  <meta name="theme-color" content="#050816" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Sachin Bajaj – Data & AI Engineer | AI Solutions & Automation</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sachin Bajaj | Data & AI Command Center</title>
     
-    :root {
-      --bg: #0d0221;
-      --bg-alt: #1a0435;
-      --card: #150a29;
-      --accent: #00d9ff;
-      --accent-soft: rgba(0, 217, 255, 0.15);
-      --text: #f0f4f8;
-      --muted: #a3b8d4;
-      --border: #2d1b4e;
-      --radius-lg: 18px;
-      --radius-md: 10px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
-      --shadow-subtle: 0 10px 24px rgba(15, 23, 42, 0.7);
-    }
-
-    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
-      background: radial-gradient(circle at 20% 50%, #2d1b4e 0, #0d0221 40%, #0a0015 100%);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
-    a:hover { color: #7dd3fc; }
-
-    /* Header */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(to bottom,
-        rgba(13, 2, 33, 0.96),
-        rgba(26, 4, 53, 0.75),
-        transparent
-      );
-      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .logo:hover { transform: scale(1.02); }
-
-    .logo-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #00d9ff, #a855f7 60%, #0d0221 100%);
-      box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.5), 0 0 32px rgba(0, 217, 255, 0.9), 0 0 60px rgba(168, 85, 247, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 700;
-      color: #e5e7eb;
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .logo-text span:first-child {
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      font-size: 14px;
-    }
-
-    .logo-text span:last-child {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--muted);
-      letter-spacing: 0.16em;
-    }
-
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 40;
-    }
-
-    nav {
-      display: flex;
-      gap: 18px;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-    }
-
-    nav a {
-      color: var(--muted);
-      position: relative;
-      padding-bottom: 4px;
-      transition: color 0.2s ease;
-    }
-
-    nav a.active { color: var(--text); }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(to right, #38bdf8, #0ea5e9);
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover, nav a.active::after {
-      width: 100%;
-    }
-
-    /* Theme Toggle */
-    .theme-toggle {
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--text);
-      padding: 6px 12px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 12px;
-      transition: all 0.2s ease;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      background: rgba(56, 189, 248, 0.1);
-    }
-
-    /* Page */
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 24px 16px 64px;
-    }
-
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
-      gap: 32px;
-      align-items: center;
-      margin-top: 16px;
-      padding: 24px 20px;
-      border-radius: 24px;
-      background: radial-gradient(circle at top left, #1a0435 0, #0d0221 50%);
-      box-shadow: 0 18px 40px rgba(0, 217, 255, 0.1), 0 0 80px rgba(168, 85, 247, 0.08);
-      border: 1px solid rgba(0, 217, 255, 0.25);
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-main { position: relative; padding-right: 10px; }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 11px 4px 4px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 217, 255, 0.5);
-      background: radial-gradient(circle at left, rgba(0, 217, 255, 0.25), rgba(26, 4, 53, 0.5));
-      color: var(--text);
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      animation: slideInLeft 0.5s ease-out;
-    }
-
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-10px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .badge-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #22c55e, #16a34a);
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: 0.02em;
-      margin-bottom: 10px;
-      min-height: 100px;
-    }
-
-    .hero-title span { background: linear-gradient(135deg, #00d9ff, #a855f7); -webkit-background-clip: text; background-clip: text; color: transparent; }
-
-    .typing-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.2em;
-      background: var(--accent);
-      margin-left: 4px;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-
-    .hero-subtitle {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 18px;
-      line-height: 1.7;
-    }
-
-    .hero-highlight {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 6px 10px;
-      margin-bottom: 20px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .hero-highlight span {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.9);
-      transition: all 0.2s ease;
-      animation: slideInDown 0.5s ease-out both;
-    }
-
-    .hero-highlight span:nth-child(1) { animation-delay: 0.1s; }
-    .hero-highlight span:nth-child(2) { animation-delay: 0.2s; }
-    .hero-highlight span:nth-child(3) { animation-delay: 0.3s; }
-
-    @keyframes slideInDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-highlight span:hover {
-      border-color: var(--accent);
-      background: rgba(56, 189, 248, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .btn-primary, .btn-ghost {
-      border-radius: 999px;
-      padding: 9px 18px;
-      font-size: 13px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #00d9ff, #a855f7);
-      color: #0d0221;
-      box-shadow: 0 12px 30px rgba(0, 217, 255, 0.6), 0 0 20px rgba(168, 85, 247, 0.4);
-      font-weight: 600;
-    }
-
-    .btn-primary:hover {
-      filter: brightness(1.15);
-      transform: translateY(-2px);
-      box-shadow: 0 18px 50px rgba(0, 217, 255, 0.7), 0 0 30px rgba(168, 85, 247, 0.5);
-    }
-
-    .btn-primary:active { transform: translateY(0); }
-
-    .btn-ghost {
-      background: rgba(13, 2, 33, 0.85);
-      border-color: rgba(0, 217, 255, 0.4);
-      color: var(--text);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--accent);
-      background: rgba(0, 217, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .hero-contact {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .hero-contact a { color: var(--accent); font-weight: 500; }
-
-    /* Hero Visual */
-    .hero-visual {
-      position: relative;
-      min-height: 260px;
-      animation: fadeInRight 0.6s ease-out;
-    }
-
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .hero-card {
-      position: relative;
-      height: 100%;
-      border-radius: 24px;
-      background: radial-gradient(circle at top, rgba(0, 217, 255, 0.12), rgba(13, 2, 33, 0.95));
-      box-shadow: 0 10px 24px rgba(168, 85, 247, 0.15), 0 0 60px rgba(0, 217, 255, 0.08);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      padding: 18px 18px 16px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .hero-card:hover {
-      border-color: rgba(0, 217, 255, 0.6);
-      box-shadow: 0 18px 40px rgba(0, 217, 255, 0.25), 0 0 80px rgba(168, 85, 247, 0.15);
-    }
-
-    .hero-tag { font-size: 11px; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 8px; }
-
-    .hero-mainline {
-      font-size: 20px;
-      font-weight: 600;
-      max-width: 260px;
-      margin-bottom: 8px;
-    }
-
-    .hero-mainline span { color: #38bdf8; }
-
-    .hero-kicker {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 14px;
-      max-width: 260px;
-      line-height: 1.6;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .stat-card {
-      padding: 8px 9px;
-      border-radius: 14px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      font-size: 11px;
-      transition: all 0.2s ease;
-    }
-
-    .stat-card:hover {
-      border-color: var(--accent);
-      background: rgba(56, 189, 248, 0.08);
-    }
-
-    .stat-label {
-      color: var(--muted);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.10em;
-      margin-bottom: 3px;
-    }
-
-    .stat-value {
-      font-weight: 600;
-      font-size: 12px;
-    }
-
-    .counter {
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .hero-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-      margin-bottom: 10px;
-    }
-
-    .hero-chips span {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      transition: all 0.2s ease;
-    }
-
-    .hero-chips span:hover {
-      border-color: var(--accent);
-      background: rgba(56, 189, 248, 0.1);
-    }
-
-    .hero-footer-note {
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-
-    .hero-orbit {
-      position: absolute;
-      inset: 6px 30px auto auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .orbit-ring {
-      width: 140px;
-      height: 140px;
-      border-radius: 999px;
-      border: 1px dashed rgba(0, 217, 255, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      animation: spin 20s linear infinite;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .orbit-core {
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #00d9ff, #0d0221);
-      box-shadow: 0 0 32px rgba(0, 217, 255, 0.8), 0 0 60px rgba(168, 85, 247, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      text-align: center;
-      padding: 6px;
-    }
-
-    .orbit-node {
-      position: absolute;
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: #0d0221;
-      border: 1px solid rgba(0, 217, 255, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .orbit-node:hover {
-      border-color: #a855f7;
-      background: rgba(168, 85, 247, 0.2);
-      transform: scale(1.15);
-      box-shadow: 0 0 15px rgba(0, 217, 255, 0.4), 0 0 25px rgba(168, 85, 247, 0.3);
-    }
-
-    .orbit-node:nth-child(2) { top: -10px; left: 50%; transform: translateX(-50%); }
-    .orbit-node:nth-child(3) { right: -10px; top: 50%; transform: translateY(-50%); }
-    .orbit-node:nth-child(4) { bottom: -10px; left: 50%; transform: translateX(-50%); }
-    .orbit-node:nth-child(5) { left: -10px; top: 50%; transform: translateY(-50%); }
-
-    /* Sections */
-    section {
-      margin-top: 36px;
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .section-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.20em;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .section-title {
-      font-size: 20px;
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-
-    .section-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      padding: 16px 16px 14px;
-      border: 1px solid rgba(0, 217, 255, 0.2);
-      box-shadow: 0 12px 28px rgba(13, 2, 33, 0.8), 0 0 40px rgba(168, 85, 247, 0.05);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(0, 217, 255, 0.5);
-      box-shadow: 0 18px 40px rgba(0, 217, 255, 0.2), 0 0 60px rgba(168, 85, 247, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .card:hover::before { left: 100%; }
-
-    .card h3 {
-      font-size: 15px;
-      margin-bottom: 6px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .card p {
-      font-size: 13px;
-      color: var(--muted);
-      position: relative;
-      z-index: 1;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .pill {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(13, 2, 33, 0.9);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      font-size: 11px;
-      color: var(--muted);
-      transition: all 0.2s ease;
-      cursor: default;
-    }
-
-    .pill:hover {
-      border-color: var(--accent);
-      background: rgba(0, 217, 255, 0.12);
-      color: var(--accent);
-      box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
-    }
-
-    .list {
-      list-style: none;
-      font-size: 13px;
-      color: var(--muted);
-      position: relative;
-      z-index: 1;
-    }
-
-    .list li {
-      padding-left: 16px;
-      position: relative;
-      margin-bottom: 6px;
-    }
-
-    .list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* Skills Section */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px;
-    }
-
-    .skill-card {
-      background: rgba(13, 2, 33, 0.9);
-      border: 1px solid rgba(0, 217, 255, 0.2);
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .skill-card:hover {
-      border-color: var(--accent);
-      background: rgba(0, 217, 255, 0.1);
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(0, 217, 255, 0.2), 0 0 40px rgba(168, 85, 247, 0.1);
-    }
-
-    .skill-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
-
-    .skill-level { font-size: 11px; color: var(--muted); }
-
-    /* Testimonials */
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-    }
-
-    .testimonial-card {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      border: 1px solid rgba(0, 217, 255, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .testimonial-card:hover {
-      border-color: rgba(0, 217, 255, 0.5);
-      box-shadow: 0 18px 40px rgba(0, 217, 255, 0.2), 0 0 60px rgba(168, 85, 247, 0.1);
-    }
-
-    .testimonial-text {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 10px;
-      line-height: 1.7;
-    }
-
-    .testimonial-author { font-size: 12px; font-weight: 500; color: var(--text); }
-
-    .testimonial-role { font-size: 11px; color: var(--muted); }
-
-    /* Contact Form */
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 12px;
-    }
-
-    .form-group label {
-      font-size: 12px;
-      font-weight: 500;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    .form-group input, .form-group textarea {
-      padding: 10px 12px;
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 8px;
-      background: rgba(13, 2, 33, 0.9);
-      color: var(--text);
-      font-size: 13px;
-      font-family: inherit;
-      transition: all 0.2s ease;
-    }
-
-    .form-group input:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2), 0 0 15px rgba(0, 217, 255, 0.15);
-    }
-
-    .form-submit {
-      background: linear-gradient(135deg, #00d9ff, #a855f7);
-      color: #0d0221;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 999px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 13px;
-      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4), 0 0 40px rgba(168, 85, 247, 0.3);
-    }
-
-    .form-submit:hover {
-      filter: brightness(1.15);
-      transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(0, 217, 255, 0.6), 0 0 60px rgba(168, 85, 247, 0.4);
-    }
-
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 12px 16px;
-      border-radius: 8px;
-      background: rgba(34, 197, 94, 0.2);
-      border: 1px solid rgba(34, 197, 94, 0.5);
-      color: #22c55e;
-      font-size: 13px;
-      z-index: 1000;
-      animation: slideInToast 0.3s ease-out;
-    }
-
-    @keyframes slideInToast {
-      from { opacity: 0; transform: translateX(100px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 40px;
-      font-size: 11px;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: space-between;
-      border-top: 1px solid rgba(31, 41, 55, 0.8);
-      padding-top: 14px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      transition: color 0.2s ease;
-    }
-
-    .footer-links a:hover { color: var(--accent); }
-
-    /* Scroll Reveal */
-    .scroll-reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out;
-    }
-
-    .scroll-reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-visual { order: -1; }
-      .section-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 720px) {
-      header {
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .nav-toggle {
-        display: block;
-      }
-
-      nav {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        gap: 8px;
-        background: rgba(15, 23, 42, 0.95);
-        padding: 16px;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .page { padding-inline: 14px; }
-      .hero { padding: 18px 14px; }
-      .skills-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
-      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .hero-orbit { display: none; }
-    }
-
-    @media (max-width: 768px) {
-      .logo-text span:first-child {
-        font-size: 12px;
-      }
-      .logo-text span:last-child {
-        font-size: 10px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .hero-actions { flex-direction: column; }
-      .btn-primary, .btn-ghost {
-        width: 100%;
-        justify-content: center;
-      }
-      .section-grid { grid-template-columns: 1fr; }
-      .testimonial-grid {
-        grid-template-columns: 1fr;
-      }
-      .page {
-        padding: 16px 12px 48px;
-      }
-      header {
-        padding: 10px 16px;
-      }
-      .hero {
-        padding: 16px 12px;
-      }
-      .form-group input, .form-group textarea {
-        font-size: 16px;
-      }
-    }
-
-    @media (max-width: 360px) {
-      .hero-title {
-        font-size: clamp(1.8rem, 3vw, 2.2rem);
-        min-height: 80px;
-      }
-      .badge {
-        font-size: 10px;
-        padding: 3px 9px 3px 3px;
-      }
-      .section-title {
-        font-size: 18px;
-      }
-      .card {
-        padding: 12px;
-      }
-      .hero-subtitle {
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2306b6d4%22/><text x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2250%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.35em%22 font-weight=%22bold%22>SB</text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#06b6d4',
+                            blue: '#3b82f6',
+                            orange: '#f97316',
+                            yellow: '#eab308',
+                            dark: '#0f172a'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #f8fafc; color: #0f172a; overflow-x: hidden; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .tilt-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .tilt-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .text-gradient {
+            background: linear-gradient(to right, #06b6d4, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
 </head>
-<body>
-  <div class="page">
-    <header>
-      <div class="logo" onclick="window.location.href='#top'">
-        <div class="logo-circle">SB</div>
-        <div class="logo-text">
-          <span>Sachin Bajaj</span>
-          <span>Data & AI Engineer</span>
-        </div>
-      </div>
-      <nav id="nav-menu">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#highlights" class="nav-link">Highlights</a>
-        <a href="#testimonials" class="nav-link">Testimonials</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      <button class="nav-toggle" id="nav-toggle">☰</button>
-      <button class="theme-toggle" id="theme-toggle">🌙</button>
-    </header>
+<body class="antialiased selection:bg-brand-cyan selection:text-white">
 
-    <main>
-      <section class="hero" id="top">
-        <div class="hero-main">
-          <div class="badge">
-            <div class="badge-dot"></div>
-            <span>Available for impactful work</span>
-          </div>
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-50"></canvas>
 
-          <h1 class="hero-title">
-            Hi, I'm <span id="typing-text">Sachin Bajaj</span><span class="typing-cursor"></span>
-          </h1>
-          <p class="hero-subtitle">
-            A Data & AI Engineer based in Bengaluru, India, turning complex data into practical, measurable business outcomes through machine learning, AI, and analytics-driven automation.
-          </p>
-
-          <div class="hero-highlight">
-            <span>Data & AI Engineering</span>
-            <span>Machine Learning & NLP</span>
-            <span>Automation & Cloud Analytics</span>
-          </div>
-
-          <div class="hero-actions">
-            <a class="btn-primary" href="#contact">
-              <span>✉</span>
-              Contact Me
+    <nav class="fixed w-full z-50 glass border-b border-gray-200 transition-all top-0">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold flex items-center gap-2 group">
+                <span class="w-8 h-8 bg-brand-cyan rounded-lg flex items-center justify-center text-white text-sm">SB</span>
+                <span class="tracking-tight group-hover:text-brand-cyan transition">Sachin Bajaj</span>
             </a>
-            <a class="btn-ghost" href="https://drive.google.com/file/d/1Mg5u0c2_dK-kAMmPjvTx2qC2tPQ0motf/view?usp=sharing" target="_blank" rel="noreferrer">
-              View Resume
-            </a>
-          </div>
-
-          <p class="hero-contact">
-            Email: <a href="mailto:sachin@sachinbajaj.info">sachin@sachinbajaj.info</a> · Phone: <a href="tel:+917220044772">+91-7220044772</a>
-          </p>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+                <a href="#stats" class="hover:text-brand-cyan transition">Stats</a>
+                <a href="#experience" class="hover:text-brand-cyan transition">Experience</a>
+                <a href="#flagship" class="hover:text-brand-cyan transition">Flagship</a>
+                <a href="#analytics" class="hover:text-brand-cyan transition">Analytics</a>
+                <a href="https://wa.me/917220044772" target="_blank" class="px-5 py-2 bg-slate-900 text-white font-bold rounded-full hover:bg-brand-cyan hover:shadow-lg transition flex items-center gap-2">
+                    <i class="fab fa-whatsapp text-lg text-green-400"></i> Hire Me
+                </a>
+            </div>
         </div>
+    </nav>
 
-        <aside class="hero-visual" aria-hidden="true">
-          <div class="hero-card">
-            <div class="hero-tag">Turning data into impact</div>
-            <div class="hero-mainline">
-              Autonomous <span>AI</span> & <span>analytics</span> solutions for modern businesses
-            </div>
-            <div class="hero-kicker">
-              Blending machine learning, NLP, and automation to build intelligent systems that scale across industries.
-            </div>
+    <section class="min-h-screen pt-32 pb-20 px-6 relative z-10 flex items-center">
+        <div class="absolute top-20 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl -z-10 animate-float"></div>
+        <div class="absolute bottom-20 left-0 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl -z-10 animate-float" style="animation-delay: 2s;"></div>
 
-            <div class="hero-stats">
-              <div class="stat-card">
-                <div class="stat-label">Projects</div>
-                <div class="stat-value"><span class="counter">15+</span></div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Graduation Year</div>
-                <div class="stat-value"><span class="counter">2024</span></div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Years</div>
-                <div class="stat-value"><span class="counter">1.5+</span></div>
-              </div>
-            </div>
-
-            <div class="hero-chips">
-              <span>Autonomous AI Receptionist</span>
-              <span>FoodTech AI Chatbot</span>
-              <span>Intelligent Workflows</span>
-            </div>
-
-            <p class="hero-footer-note">
-              Designed for data-driven, AI-first organizations
-            </p>
-
-            <div class="hero-orbit">
-              <div class="orbit-ring">
-                <div class="orbit-core">
-                  Data → AI
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-gray-200 rounded-full text-slate-600 text-sm font-semibold shadow-sm">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    System Online: Bengaluru, India
                 </div>
-                <div class="orbit-node" onclick="this.textContent = 'ML++'">ML</div>
-                <div class="orbit-node" onclick="this.textContent = 'NLP++">NLP</div>
-                <div class="orbit-node" onclick="this.textContent = 'Cloud++">Cloud</div>
-                <div class="orbit-node" onclick="this.textContent = 'Auto++">Auto</div>
-              </div>
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight text-slate-900">
+                    Decoding Business <br> <span class="text-gradient">Through Data</span>
+                </h1>
+                <p class="text-slate-600 text-lg max-w-lg leading-relaxed">
+                    I turn chaos into clarity. From <b>AI Chatbots</b> to <b>PowerBI Dashboards</b>, I build the automated systems that drive business logic without human intervention.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="runDiagnostics()" class="px-8 py-4 bg-slate-900 text-white rounded-xl font-mono font-bold hover:bg-slate-800 transition shadow-xl shadow-slate-900/20 flex items-center gap-3">
+                        <i class="fas fa-terminal text-brand-cyan"></i> RUN_DIAGNOSTICS
+                    </button>
+                    <a href="https://wa.me/917220044772" target="_blank" class="px-8 py-4 bg-white border border-gray-200 text-slate-700 rounded-xl font-bold hover:border-brand-cyan hover:text-brand-cyan transition flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Chat Now
+                    </a>
+                </div>
             </div>
-          </div>
-        </aside>
-      </section>
 
-      <section id="about" class="scroll-reveal">
-        <div class="section-label">About</div>
-        <h2 class="section-title">Data & AI Specialist</h2>
-
-        <div class="section-grid">
-          <div class="card">
-            <h3>From raw data to real-world outcomes</h3>
-            <p>
-              A Data & AI Specialist with experience in building predictive models, NLP systems, and automation pipelines that streamline decision-making across domains.
-            </p>
-            <p style="margin-top: 6px;">
-              The focus is on combining artificial intelligence with analytics foundations to deliver scalable, production-ready solutions that directly support business strategy.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Machine Learning</span>
-              <span class="pill">NLP</span>
-              <span class="pill">Automation Frameworks</span>
-              <span class="pill">Cloud Analytics</span>
+            <div class="relative group reveal delay-200 hidden lg:block">
+                <div class="relative bg-[#1e293b] rounded-2xl overflow-hidden shadow-2xl border border-slate-700 transform group-hover:scale-[1.01] transition duration-500">
+                    <div class="bg-[#0f172a] px-4 py-3 flex items-center justify-between border-b border-slate-700">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="text-xs font-mono text-slate-400">sachin_bajaj@automator ~ bash</div>
+                    </div>
+                    <div class="p-6 font-mono text-xs md:text-sm h-[320px] overflow-y-auto text-slate-300" id="console-output">
+                        <div class="mb-4">
+                            <span class="text-green-400">➜</span> <span class="text-brand-cyan">~</span> <span class="text-white">whoami</span><br>
+                            Sachin Bajaj | Data Scientist & AI Engineer
+                        </div>
+                        <div class="mb-4">
+                            <span class="text-green-400">➜</span> <span class="text-brand-cyan">~</span> <span class="text-white">cat stats.json</span><br>
+                            <span class="text-brand-yellow">{</span><br>
+                            &nbsp;&nbsp;<span class="text-brand-blue">"experience"</span>: <span class="text-green-300">"1.5+ Years"</span>,<br>
+                            &nbsp;&nbsp;<span class="text-brand-blue">"projects_delivered"</span>: <span class="text-green-300">"15+"</span>,<br>
+                            &nbsp;&nbsp;<span class="text-brand-blue">"core_stack"</span>: [<span class="text-green-300">"Python"</span>, <span class="text-green-300">"GenAI"</span>, <span class="text-green-300">"PowerBI"</span>]<br>
+                            <span class="text-brand-yellow">}</span>
+                        </div>
+                        <div id="dynamic-logs"></div> 
+                        <div class="mt-2"><span class="text-green-400">➜</span> <span class="text-brand-cyan">~</span> <span class="animate-pulse">_</span></div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="card">
-            <h3>Capabilities at a glance</h3>
-            <ul class="list">
-              <li>Designing and deploying predictive models for data-driven decision-making.</li>
-              <li>Building conversational AI agents and chatbots for real-time user interaction.</li>
-              <li>Creating automated workflows that reduce manual effort and increase efficiency.</li>
-              <li>Bridging the gap between raw data and actionable business intelligence.</li>
-            </ul>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <section id="skills" class="scroll-reveal">
-        <div class="section-label">Technical Arsenal</div>
-        <h2 class="section-title">Core Skills & Expertise</h2>
-
-        <div class="skills-grid">
-          <div class="skill-card">
-            <div class="skill-name">Python</div>
-            <div class="skill-level">Expert</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">Machine Learning</div>
-            <div class="skill-level">Advanced</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">NLP & LLMs</div>
-            <div class="skill-level">Advanced</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">Data Analysis</div>
-            <div class="skill-level">Expert</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">SQL & Databases</div>
-            <div class="skill-level">Advanced</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">GCP & Cloud</div>
-            <div class="skill-level">Advanced</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">API Integration</div>
-            <div class="skill-level">Expert</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">Automation</div>
-            <div class="skill-level">Advanced</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">Web Scraping</div>
-            <div class="skill-level">Advanced</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">Firebase</div>
-            <div class="skill-level">Advanced</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">Zapier & Make</div>
-            <div class="skill-level">Advanced</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name">JavaScript</div>
-            <div class="skill-level">Intermediate</div>
-          </div>
+    <section id="stats" class="py-10 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center reveal">
+                <h3 class="text-4xl font-bold text-brand-cyan">15+</h3>
+                <p class="text-sm text-slate-500 uppercase tracking-wider font-bold mt-2">Projects Delivered</p>
+            </div>
+            <div class="text-center reveal delay-100">
+                <h3 class="text-4xl font-bold text-brand-blue">1.5+</h3>
+                <p class="text-sm text-slate-500 uppercase tracking-wider font-bold mt-2">Years Experience</p>
+            </div>
+            <div class="text-center reveal delay-200">
+                <h3 class="text-4xl font-bold text-brand-orange">100%</h3>
+                <p class="text-sm text-slate-500 uppercase tracking-wider font-bold mt-2">Automation</p>
+            </div>
+            <div class="text-center reveal delay-300">
+                <h3 class="text-4xl font-bold text-brand-yellow">24/7</h3>
+                <p class="text-sm text-slate-500 uppercase tracking-wider font-bold mt-2">System Uptime</p>
+            </div>
         </div>
-      </section>
+    </section>
 
-      <section id="highlights" class="scroll-reveal">
-        <div class="section-label">Innovation Highlights</div>
-        <h2 class="section-title">Selected AI initiatives</h2>
+    <section id="experience" class="py-20 bg-slate-50 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-16 flex items-center gap-3 reveal">
+                <i class="fas fa-briefcase text-brand-cyan"></i> Professional <span class="text-gradient">Journey</span>
+            </h2>
 
-        <div class="section-grid">
-          <div class="card">
-            <h3>🎙️ Autonomous AI Receptionist for Voice Calls</h3>
-            <p>
-              An intelligent receptionist that answers and handles voice calls end-to-end, using conversational AI to route queries, capture information, and support users without human intervention.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Voice AI</span>
-              <span class="pill">Telephony Integration</span>
-              <span class="pill">NLP</span>
-              <span class="pill">Automation</span>
+            <div class="space-y-12 border-l-2 border-slate-200 ml-4 pl-8 pb-12">
+                <div class="relative reveal">
+                    <span class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-cyan border-4 border-white shadow-lg"></span>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex justify-between flex-wrap gap-2 mb-4">
+                            <div><h3 class="text-xl font-bold text-slate-800">Data Science Analyst</h3><p class="text-brand-cyan font-semibold">Skope Kitchens</p></div>
+                            <span class="text-sm text-slate-500 font-mono">Mar 2025 - Present</span>
+                        </div>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600 text-sm">
+                            <li>Built an <b>AI Chatbot (Gemini + RAG)</b> that reduced manual query time by 90%.</li>
+                            <li>Automated vendor selection & PO generation using DotPe API.</li>
+                            <li>Created demand forecasting pipelines using <b>Prophet & ARIMA</b>.</li>
+                            <li>Developed real-time Looker Studio dashboards for ops tracking.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="relative reveal delay-100">
+                    <span class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-blue border-4 border-white shadow-lg"></span>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex justify-between flex-wrap gap-2 mb-4">
+                            <div><h3 class="text-xl font-bold text-slate-800">Data Analyst</h3><p class="text-brand-blue font-semibold">CENDROL CONSTRUCTIONS</p></div>
+                            <span class="text-sm text-slate-500 font-mono">Dec 2024 - Mar 2025</span>
+                        </div>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600 text-sm">
+                            <li>Developed <b>Tableau dashboards</b> for real-time decision-making.</li>
+                            <li>Improved data accuracy by 15% through SQL/Python cleaning.</li>
+                            <li>Conducted predictive analysis for sales trends.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="relative reveal delay-200">
+                    <span class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-orange border-4 border-white shadow-lg"></span>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex justify-between flex-wrap gap-2 mb-4">
+                            <div><h3 class="text-xl font-bold text-slate-800">Data Scientist</h3><p class="text-brand-orange font-semibold">FlivoAI</p></div>
+                            <span class="text-sm text-slate-500 font-mono">Jun 2024 - Dec 2024</span>
+                        </div>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600 text-sm">
+                            <li>Built <b>GenAI-powered assistants</b> (Health & Sales) using OpenAI API.</li>
+                            <li>Designed algorithms to process large datasets on AWS/GCP.</li>
+                            <li>Integrated Twilio for voice/SMS interactions.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="card">
-            <h3>🍔 FoodTech AI Chatbot</h3>
-            <p>
-              A specialized chatbot built for FoodTech use cases, answering product, menu, and operations-related questions while integrating with backend data to provide context-aware responses.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Domain-specific AI</span>
-              <span class="pill">Context-aware Chat</span>
-              <span class="pill">Knowledge Integration</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>⚙️ Intelligent Workflow Automation</h3>
-            <p>
-              End-to-end automation pipelines that integrate multiple systems, reduce manual effort by 80%+, and enable data-driven decision-making at scale across business operations.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Workflow Design</span>
-              <span class="pill">API Integration</span>
-              <span class="pill">Data Pipeline</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>📊 Predictive Analytics & Forecasting</h3>
-            <p>
-              Built advanced ML models for forecasting, anomaly detection, and pattern recognition that directly improved business KPIs and operational efficiency.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Predictive Modeling</span>
-              <span class="pill">Time Series Analysis</span>
-              <span class="pill">Business Intelligence</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>📱 Blinkit Data Analysis with PowerBI</h3>
-            <p>
-              Comprehensive data analysis project analyzing Blinkit's operational metrics, delivery patterns, and customer behavior using advanced visualization techniques in PowerBI.
-            </p>
-            <div class="pill-row">
-              <span class="pill">PowerBI</span>
-              <span class="pill">Data Visualization</span>
-              <span class="pill">E-commerce Analytics</span>
-            </div>
-            <p style="margin-top: 8px; font-size: 12px;">
-              <a href="https://github.com/sachinbajaj4477/Blinkit-Data-Analysis" target="_blank" rel="noreferrer" style="color: var(--accent); text-decoration: underline;">View on GitHub →</a>
-            </p>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <section id="testimonials" class="scroll-reveal">
-        <div class="section-label">What People Say</div>
-        <h2 class="section-title">Colleague Feedback</h2>
+    <section id="flagship" class="py-20 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3 reveal">
+                <i class="fas fa-star text-brand-yellow"></i> Flagship <span class="text-gradient">Initiatives</span>
+            </h2>
 
-        <div class="testimonial-grid">
-          <div class="testimonial-card">
-            <div class="testimonial-text">
-              "Sachin's AI solutions have transformed our operational efficiency. His expertise in automation and data engineering is exceptional. Highly recommended for any data-intensive project."
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="glass p-8 rounded-2xl border-t-4 border-brand-cyan shadow-lg tilt-card reveal">
+                    <h3 class="text-2xl font-bold mb-2">FoodTech AI Chatbot</h3>
+                    <p class="text-xs text-brand-cyan font-bold uppercase mb-4">Skope Kitchens | Jul 2025</p>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        To solve repetitive tasks like sales reporting, I developed a smart AI Chatbot powered by <b>Google’s Gemini LLM</b> & RAG. It provides instant responses, generates PDF/CSV reports, and assists with order management via Firebase.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Gemini LLM</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">RAG</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Firebase</span>
+                    </div>
+                </div>
+
+                <div class="glass p-8 rounded-2xl border-t-4 border-brand-orange shadow-lg tilt-card reveal">
+                    <h3 class="text-2xl font-bold mb-2">Smart Automated FCR System</h3>
+                    <p class="text-xs text-brand-orange font-bold uppercase mb-4">Skope Kitchens | Mar 2025</p>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        A Real-Time Recipe Costing system. Centralized procurement rates update all sub-recipes recursively. Chef enters yield, and the system calculates batch/portion costs instantly. Zero manual errors.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Google Apps Script</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Advanced Formulas</span>
+                    </div>
+                </div>
+
+                <div class="glass p-8 rounded-2xl border-t-4 border-brand-blue shadow-lg tilt-card reveal">
+                    <h3 class="text-2xl font-bold mb-2">GenAI Health & Sales Assistant</h3>
+                    <p class="text-xs text-brand-blue font-bold uppercase mb-4">FlivoAI | Jul 2024</p>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Automated healthcare Q&A and sales workflows. Handles basic illness queries via GenAI, routes critical cases to doctors, and integrates with Twilio for voice/SMS interaction.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">OpenAI API</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Twilio</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Flask</span>
+                    </div>
+                </div>
+
+                <div class="glass p-8 rounded-2xl border-t-4 border-purple-500 shadow-lg tilt-card reveal">
+                    <h3 class="text-2xl font-bold mb-2">Data Intelligence Pipeline</h3>
+                    <p class="text-xs text-purple-500 font-bold uppercase mb-4">Cendrol | Feb 2025</p>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        End-to-end pipeline: Google Sheets extraction -> SQL storage -> Python EDA -> LLM Chatbot. Allows users to query complex construction data intelligently.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">SQL</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">EDA</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">NLP</span>
+                    </div>
+                </div>
             </div>
-            <div class="testimonial-author">Santosh Aluwala</div>
-            <div class="testimonial-role">CEO & Founder, Forgensys</div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="testimonial-text">
-              "His data analysis and visualization capabilities are top-tier. The insights generated from his work directly drove business decisions and improved our KPIs significantly."
-            </div>
-            <div class="testimonial-author">Priya Sharma</div>
-            <div class="testimonial-role">Senior Analytics Lead</div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <section id="contact" class="scroll-reveal">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">Let's build intelligent systems</h2>
+    <section id="analytics" class="py-20 bg-slate-50 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3 reveal">
+                <i class="fas fa-chart-pie text-brand-cyan"></i> Analytics & <span class="text-gradient">Research</span>
+            </h2>
 
-        <div class="section-grid">
-          <div class="card">
-            <h3>Reach out directly</h3>
-            <form id="contact-form">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your name" required>
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="your@email.com" required>
-              </div>
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="4" placeholder="Your message..." required></textarea>
-              </div>
-              <button type="submit" class="form-submit">Send Message</button>
-            </form>
-          </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
+                    <i class="fas fa-chart-bar text-brand-yellow text-3xl mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">E-Commerce Sales Dashboard</h3>
+                    <p class="text-sm text-slate-600 mb-4">Power BI dashboard analyzing KPIs, state-wise performance, and profit trends. <b>Skills:</b> DAX, Power Query.</p>
+                </div>
 
-          <div class="card">
-            <h3>Quick links</h3>
-            <p>Email: <a href="mailto:sachin@sachinbajaj.info">sachin@sachinbajaj.info</a></p>
-            <p>Phone: <a href="tel:+917220044772">+91-7220044772</a></p>
-            <p style="margin-top: 8px;">
-              Open to roles, collaborations, and consulting engagements in Data & AI Engineering, machine learning, and automation.
-            </p>
-            <div class="pill-row" style="margin-top: 12px;">
-              <a class="pill" href="https://www.linkedin.com/in/sachin-bajaj-data/" target="_blank" rel="noreferrer">
-                LinkedIn Profile
-              </a>
-              <a class="pill" href="https://www.instagram.com/sachin_bajaj__/" target="_blank" rel="noreferrer">
-                Instagram
-              </a>
+                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
+                    <i class="fas fa-phone-volume text-brand-blue text-3xl mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">AI Inbound Call Automation</h3>
+                    <p class="text-sm text-slate-600 mb-4">Built using <b>n8n & ElevenLabs</b>. Answers calls 24/7, books appointments, and captures details automatically.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
+                    <i class="fas fa-search-plus text-red-500 text-3xl mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Fabric Defect Detection</h3>
+                    <p class="text-sm text-slate-600 mb-4">Deep Learning model (YOLOv4/CNN) identifying textile defects with <b>93% recall</b>. Used at FlivoAI.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
+                    <i class="fab fa-instagram text-pink-500 text-3xl mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Instagram Data Analysis</h3>
+                    <p class="text-sm text-slate-600 mb-4">Analyzed engagement metrics (Reels vs Images) using Python (Pandas/Seaborn) to optimize content strategy.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
+                    <i class="fas fa-taxi text-brand-orange text-3xl mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Ride-Hailing Dynamic Pricing</h3>
+                    <p class="text-sm text-slate-600 mb-4">Predicting ride costs using Random Forest & XGBoost. Real-time pricing strategy optimization.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
+                    <i class="fas fa-carrot text-green-500 text-3xl mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Ingredient Consumption Tool</h3>
+                    <p class="text-sm text-slate-600 mb-4">Google Apps Script tool that maps ingredients to market prices and calculates costs based on dish sales.</p>
+                </div>
+
+                 <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
+                    <i class="fas fa-heartbeat text-red-400 text-3xl mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Fitness Watch Analysis</h3>
+                    <p class="text-sm text-slate-600 mb-4">Analyzed smartwatch data (steps, energy burned) to understand health patterns using Python EDA.</p>
+                </div>
+
+                 <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
+                    <i class="fas fa-subway text-blue-800 text-3xl mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Delhi Metro Network Analysis</h3>
+                    <p class="text-sm text-slate-600 mb-4">Geospatial mapping and route optimization for the Delhi Metro system to reduce congestion.</p>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-    </main>
+    </section>
 
-    <footer>
-      <span>© <span id="year"></span> Sachin Bajaj · Data & AI Engineer</span>
-      <div class="footer-links">
-        <a href="#top">Back to top</a>
-      </div>
+    <footer class="py-12 bg-slate-900 text-center relative z-10 text-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-6">Initialize Connection</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-4 mb-8">
+                <a href="https://wa.me/917220044772" target="_blank" class="flex items-center justify-center gap-3 px-8 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition shadow-lg shadow-green-500/20">
+                    <i class="fab fa-whatsapp text-xl"></i> WhatsApp (+91 7220044772)
+                </a>
+                <a href="mailto:sachin@sachinbajaj.info" class="flex items-center justify-center gap-3 px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-lg transition">
+                    <i class="fas fa-envelope"></i> Email Me
+                </a>
+            </div>
+            <p class="text-slate-400 text-xs font-mono">© 2026 Sachin Bajaj | Data Analyst with Applied AI</p>
+        </div>
     </footer>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
-  <script>
-    // EmailJS Configuration - YOUR CREDENTIALS
-    emailjs.init('Gkw0Kha92hIfz3w37');
-    const SERVICE_ID = 'service_9pr0ycj';
-    const TEMPLATE_ID = 'template_9se5dnd';
-    // Contact form handler
-const contactForm = document.getElementById("contact-form");
-contactForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    <a href="https://wa.me/917220044772" target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center text-white text-3xl shadow-[0_0_20px_rgba(34,197,94,0.6)] hover:scale-110 transition z-50 animate-bounce">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const message = document.getElementById("message").value;
+    <script>
+        function runDiagnostics() {
+            const logs = document.getElementById('dynamic-logs');
+            const btn = document.querySelector('button[onclick="runDiagnostics()"]');
+            
+            btn.innerHTML = `<i class="fas fa-cog fa-spin"></i> RUNNING...`;
+            logs.innerHTML = ''; 
 
-  try {
-    const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      from_name: name,
-      from_email: email,
-      message: message,
-      to_email: "sachin@sachinbajaj.info",
-    });
+            const steps = [
+                { msg: "Scanning skills: Python, SQL, PowerBI found...", color: "text-slate-400", delay: 500 },
+                { msg: "Loading 15+ Projects...", color: "text-brand-cyan", delay: 1000 },
+                { msg: "Verifying Experience: 1.5+ Years...", color: "text-brand-yellow", delay: 1800 },
+                { msg: "System Ready. Open for Hire.", color: "text-green-400 font-bold", delay: 2800 }
+            ];
 
-    if (response.status === 200) {
-      showToast("✅ Message sent successfully! I’ll get back to you soon.");
-      contactForm.reset();
-    } else {
-      showToast("❌ Error sending message. Please try again.");
-    }
-  } catch (error) {
-    showToast("❌ Connection error. Please try again.");
-    console.error("EmailJS Error:", error);
-  }
-});
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile menu toggle
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-
-    navToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
-
-    // Close menu on link click
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
-    });
-
-    // Typing effect
-    const typingText = document.getElementById('typing-text');
-    const words = ['Sachin Bajaj', 'an AI Engineer', 'a Data Specialist', 'an Innovator'];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function typeEffect() {
-      const currentWord = words[wordIndex];
-      if (isDeleting) {
-        charIndex--;
-      } else {
-        charIndex++;
-      }
-
-      typingText.textContent = currentWord.substring(0, charIndex);
-
-      if (!isDeleting && charIndex === currentWord.length) {
-        setTimeout(() => { isDeleting = true; }, 1500);
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-      }
-
-      const speed = isDeleting ? 50 : 100;
-      setTimeout(typeEffect, speed);
-    }
-
-    typeEffect();
-
-    // Counter animation
-    function animateCounter(element) {
-      const text = element.textContent;
-      const isDecimal = text.includes('.');
-      const num = isDecimal ? parseFloat(text) : parseInt(text);
-      const increment = isDecimal ? 0.1 : Math.ceil(num / 20);
-      let current = 0;
-
-      const counter = setInterval(() => {
-        current += increment;
-        if (current >= num) {
-          element.textContent = text;
-          clearInterval(counter);
-        } else {
-          const display = isDecimal ? current.toFixed(1) : Math.floor(current);
-          element.textContent = display + '+';
-        }
-      }, 50);
-    }
-
-    const observers = document.querySelectorAll('.counter');
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !entry.target.dataset.animated) {
-          entry.target.dataset.animated = true;
-          animateCounter(entry.target);
-        }
-      });
-    });
-
-    observers.forEach((obs) => counterObserver.observe(obs));
-
-    // Navigation active state
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section');
-
-    const observerOptions = {
-      threshold: 0.3,
-      rootMargin: '0px 0px -30% 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => link.classList.remove('active'));
-          const activeLink = document.querySelector(
-            `a[href="#${entry.target.id}"]`
-          );
-          if (activeLink) {
-            activeLink.classList.add('active');
-          }
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach((section) => observer.observe(section));
-
-    // Scroll reveal animation
-    const revealElements = document.querySelectorAll('.scroll-reveal');
-
-    const revealObserverOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, revealObserverOptions);
-
-    revealElements.forEach((element) => revealObserver.observe(element));
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && href !== '#top') {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
+            let cumulativeDelay = 0;
+            steps.forEach(step => {
+                cumulativeDelay += step.delay;
+                setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.className = `mb-1 ${step.color}`;
+                    div.innerHTML = `<span class="text-xs text-slate-500">[${new Date().toLocaleTimeString()}]</span> ${step.msg}`;
+                    logs.appendChild(div);
+                    document.getElementById('console-output').scrollTop = document.getElementById('console-output').scrollHeight;
+                }, cumulativeDelay);
             });
-          }
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fas fa-check"></i> COMPLETE`;
+                btn.classList.add('bg-green-600');
+            }, cumulativeDelay + 500);
         }
-      });
-    });
 
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+        // Particle System
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
 
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-    }
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
 
-    setTheme(savedTheme);
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width; this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if(this.x < 0 || this.x > width) this.vx *= -1;
+                if(this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                ctx.fillStyle = 'rgba(148, 163, 184, 0.5)'; ctx.fill();
+            }
+        }
+        for(let i=0; i<40; i++) particles.push(new Particle());
 
-    themeToggle.addEventListener('click', () => {
-      const current = localStorage.getItem('theme') || 'dark';
-      const newTheme = current === 'dark' ? 'light' : 'dark';
-      setTheme(newTheme);
-    });
-    emailjs.init('Gkw0Kha92hIfz3w37');
+        function animate() {
+            ctx.clearRect(0,0,width,height);
+            particles.forEach((p, index) => {
+                p.update(); p.draw();
+                for(let j=index; j<particles.length; j++) {
+                    const dx = p.x - particles[j].x; const dy = p.y - particles[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 100) {
+                        ctx.beginPath(); ctx.strokeStyle = `rgba(148, 163, 184, ${0.2 - dist/500})`;
+                        ctx.lineWidth = 0.5; ctx.moveTo(p.x, p.y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
 
-const SERVICE_ID = 'service_9pr0ycj';
-const TEMPLATE_ID = 'template_9se5dnd';
-
-const contactForm = document.getElementById("contact-form");
-contactForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const message = document.getElementById("message").value;
-
-  try {
-    const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      from_name: name,
-      from_email: email,
-      message: message,
-      to_email: "sachin@sachinbajaj.info",
-    });
-
-    if (response.status === 200) {
-      showToast("Message sent successfully!");
-      contactForm.reset();
-    } else {
-      showToast("Something went wrong");
-    }
-  } catch (error) {
-    showToast("Network error");
-    console.error(error);
-  }
-});
-
-    // Toast notification
-    function showToast(message) {
-      const toast = document.createElement('div');
-      toast.className = 'toast';
-      toast.textContent = message;
-      document.body.appendChild(toast);
-
-      setTimeout(() => {
-        toast.style.animation = 'slideInToast 0.3s ease-out reverse';
-        setTimeout(() => toast.remove(), 300);
-      }, 3000);
-    }
-  </script>
-  <script>
-/**
- * Scroll reveal helper using IntersectionObserver.
- * Place this inline just before </body> in index.html.
- * It will add the "active" class to elements with class "scroll-reveal"
- * as they come into view, triggering your existing CSS animations.
- */
-(function () {
-  function initScrollReveal() {
-    const revealItems = document.querySelectorAll('.scroll-reveal');
-
-    if (!revealItems.length) return;
-
-    // If IntersectionObserver is supported, use it.
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-
-          // Support optional per-element delay via data-sr-delay (e.g. data-sr-delay="150ms")
-          const delay = entry.target.dataset.srDelay;
-          if (delay) {
-            entry.target.style.transitionDelay = delay;
-          }
-
-          entry.target.classList.add('active');
-
-          // Stop observing once revealed to avoid repeated toggles
-          obs.unobserve(entry.target);
+        // Reveal on Scroll
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(reveal => {
+                if (reveal.getBoundingClientRect().top < window.innerHeight - 100) reveal.classList.add('active');
+            });
         });
-      }, {
-        root: null,
-        rootMargin: '0px 0px -8% 0px', // reveal a bit before fully in view
-        threshold: 0.12
-      });
-
-      revealItems.forEach(item => observer.observe(item));
-    } else {
-      // Fallback for older browsers: reveal all immediately
-      revealItems.forEach(item => item.classList.add('active'));
-    }
-  }
-
-  // Wait for DOM ready before initializing
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
-  } else {
-    initScrollReveal();
-  }
-})();
-</script>
+    </script>
 </body>
-  
 </html>
