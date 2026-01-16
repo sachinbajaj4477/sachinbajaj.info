@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sachin Bajaj | Data & AI Command Center</title>
+    <title>Sachin Bajaj | Data Intelligence Hub</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2306b6d4%22/><text x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2250%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.35em%22 font-weight=%22bold%22>SB</text></svg>">
 
@@ -18,16 +18,22 @@
                             blue: '#3b82f6',
                             orange: '#f97316',
                             yellow: '#eab308',
-                            dark: '#0f172a'
+                            dark: '#0f172a',
+                            slate: '#f1f5f9'
                         }
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
+                        'marquee': 'marquee 25s linear infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' }
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' }
                         }
                     }
                 }
@@ -41,77 +47,113 @@
         body { font-family: 'Space Grotesk', sans-serif; background-color: #f8fafc; color: #0f172a; overflow-x: hidden; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
 
+        /* Glassmorphism */
         .glass {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
+        /* 3D Tilt */
         .tilt-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .tilt-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .tilt-card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.1); }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        /* Initial Fade In */
+        .fade-in { animation: fadeIn 1s ease-out forwards; opacity: 0; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Scroll Reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* Gradient Text */
         .text-gradient {
             background: linear-gradient(to right, #06b6d4, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        /* Boot Screen */
+        #boot-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0f172a; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        /* Skill Bar Animation */
+        .skill-bar { transition: width 1.5s ease-out; width: 0%; }
+        
+        /* Blinking Cursor */
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-cyan selection:text-white">
+<body class="antialiased selection:bg-brand-cyan selection:text-white relative">
 
-    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-50"></canvas>
+    <div id="boot-screen">
+        <div class="text-center">
+            <div class="text-brand-cyan font-mono text-xl animate-pulse mb-2">INITIALIZING SYSTEM...</div>
+            <div class="w-48 h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-cyan animate-[pulse_2s_linear_infinite]" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
     <nav class="fixed w-full z-50 glass border-b border-gray-200 transition-all top-0">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold flex items-center gap-2 group">
-                <span class="w-8 h-8 bg-brand-cyan rounded-lg flex items-center justify-center text-white text-sm">SB</span>
-                <span class="tracking-tight group-hover:text-brand-cyan transition">Sachin Bajaj</span>
+                <span class="w-10 h-10 bg-gradient-to-br from-brand-cyan to-brand-blue rounded-lg flex items-center justify-center text-white text-sm font-mono shadow-lg group-hover:scale-110 transition">SB</span>
+                <span class="tracking-tight group-hover:text-brand-cyan transition hidden sm:inline">Sachin Bajaj</span>
             </a>
             
-            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-                <a href="#stats" class="hover:text-brand-cyan transition">Stats</a>
-                <a href="#experience" class="hover:text-brand-cyan transition">Experience</a>
-                <a href="#flagship" class="hover:text-brand-cyan transition">Flagship</a>
-                <a href="#analytics" class="hover:text-brand-cyan transition">Analytics</a>
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 font-mono">
+                <a href="#stats" class="hover:text-brand-cyan transition">LOGS</a>
+                <a href="#skills" class="hover:text-brand-cyan transition">ARSENAL</a>
+                <a href="#experience" class="hover:text-brand-cyan transition">TIMELINE</a>
+                <a href="#projects" class="hover:text-brand-cyan transition">DATABASE</a>
                 <a href="https://wa.me/917220044772" target="_blank" class="px-5 py-2 bg-slate-900 text-white font-bold rounded-full hover:bg-brand-cyan hover:shadow-lg transition flex items-center gap-2">
-                    <i class="fab fa-whatsapp text-lg text-green-400"></i> Hire Me
+                    <i class="fab fa-whatsapp text-lg text-green-400"></i> HIRE_ME
                 </a>
+            </div>
+            <button id="mobile-btn" class="md:hidden text-2xl text-slate-700"><i class="fas fa-bars"></i></button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 p-4 absolute w-full shadow-lg">
+            <div class="flex flex-col gap-4 font-mono text-sm">
+                <a href="#skills" class="block py-2">ARSENAL</a>
+                <a href="#experience" class="block py-2">TIMELINE</a>
+                <a href="#projects" class="block py-2">DATABASE</a>
+                <a href="https://wa.me/917220044772" class="block py-2 text-brand-cyan font-bold">HIRE ME (WhatsApp)</a>
             </div>
         </div>
     </nav>
 
-    <section class="min-h-screen pt-32 pb-20 px-6 relative z-10 flex items-center">
-        <div class="absolute top-20 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl -z-10 animate-float"></div>
-        <div class="absolute bottom-20 left-0 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl -z-10 animate-float" style="animation-delay: 2s;"></div>
-
+    <section class="min-h-screen pt-32 pb-20 px-6 relative z-10 flex items-center overflow-hidden">
+        <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-brand-cyan/5 rounded-full blur-3xl -z-10 animate-float"></div>
+        
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-            <div class="space-y-8 reveal">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-gray-200 rounded-full text-slate-600 text-sm font-semibold shadow-sm">
+            <div class="space-y-8 fade-in" style="animation-delay: 0.5s;">
+                <div class="inline-flex items-center gap-3 px-4 py-2 bg-white border border-gray-200 rounded-full text-slate-600 text-xs font-bold font-mono shadow-sm">
                     <span class="relative flex h-2 w-2">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    System Online: Bengaluru, India
+                    SYSTEM ONLINE: BENGALURU, INDIA
                 </div>
                 <h1 class="text-5xl md:text-7xl font-bold leading-tight text-slate-900">
                     Decoding Business <br> <span class="text-gradient">Through Data</span>
                 </h1>
                 <p class="text-slate-600 text-lg max-w-lg leading-relaxed">
-                    I turn chaos into clarity. From <b>AI Chatbots</b> to <b>PowerBI Dashboards</b>, I build the automated systems that drive business logic without human intervention.
+                    I turn chaos into clarity. Specializing in <b>AI Agents</b>, <b>Automated Pipelines</b>, and <b>Advanced Analytics</b>. I don't just analyze data; I build the systems that act on it.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <button onclick="runDiagnostics()" class="px-8 py-4 bg-slate-900 text-white rounded-xl font-mono font-bold hover:bg-slate-800 transition shadow-xl shadow-slate-900/20 flex items-center gap-3">
-                        <i class="fas fa-terminal text-brand-cyan"></i> RUN_DIAGNOSTICS
+                    <button onclick="runDiagnostics()" class="px-8 py-4 bg-slate-900 text-white rounded-xl font-mono font-bold hover:bg-slate-800 transition shadow-xl shadow-slate-900/20 flex items-center gap-3 group relative overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-2"><i class="fas fa-play text-brand-cyan"></i> EXECUTE_DIAGNOSTICS</span>
+                        <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                     </button>
                     <a href="https://wa.me/917220044772" target="_blank" class="px-8 py-4 bg-white border border-gray-200 text-slate-700 rounded-xl font-bold hover:border-brand-cyan hover:text-brand-cyan transition flex items-center gap-2">
                         <i class="fab fa-whatsapp"></i> Chat Now
@@ -119,27 +161,29 @@
                 </div>
             </div>
 
-            <div class="relative group reveal delay-200 hidden lg:block">
-                <div class="relative bg-[#1e293b] rounded-2xl overflow-hidden shadow-2xl border border-slate-700 transform group-hover:scale-[1.01] transition duration-500">
+            <div class="relative group fade-in hidden lg:block" style="animation-delay: 0.8s;">
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-cyan to-brand-blue rounded-2xl blur opacity-20 group-hover:opacity-40 transition"></div>
+                <div class="relative bg-[#1e293b] rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
                     <div class="bg-[#0f172a] px-4 py-3 flex items-center justify-between border-b border-slate-700">
                         <div class="flex gap-2">
                             <div class="w-3 h-3 rounded-full bg-red-500"></div>
                             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                             <div class="w-3 h-3 rounded-full bg-green-500"></div>
                         </div>
-                        <div class="text-xs font-mono text-slate-400">sachin_bajaj@automator ~ bash</div>
+                        <div class="text-xs font-mono text-slate-400">sachin_admin@server ~ bash</div>
                     </div>
-                    <div class="p-6 font-mono text-xs md:text-sm h-[320px] overflow-y-auto text-slate-300" id="console-output">
+                    <div class="p-6 font-mono text-xs md:text-sm h-[350px] overflow-y-auto text-slate-300 scrollbar-thin scrollbar-thumb-slate-700" id="console-output">
                         <div class="mb-4">
-                            <span class="text-green-400">➜</span> <span class="text-brand-cyan">~</span> <span class="text-white">whoami</span><br>
-                            Sachin Bajaj | Data Scientist & AI Engineer
+                            <span class="text-green-400">➜</span> <span class="text-brand-cyan">~</span> <span class="text-white">load_profile --verbose</span><br>
+                            Loading Sachin Bajaj Profile... [OK]
                         </div>
                         <div class="mb-4">
-                            <span class="text-green-400">➜</span> <span class="text-brand-cyan">~</span> <span class="text-white">cat stats.json</span><br>
+                            <span class="text-green-400">➜</span> <span class="text-brand-cyan">~</span> <span class="text-white">cat capabilities.json</span><br>
                             <span class="text-brand-yellow">{</span><br>
-                            &nbsp;&nbsp;<span class="text-brand-blue">"experience"</span>: <span class="text-green-300">"1.5+ Years"</span>,<br>
-                            &nbsp;&nbsp;<span class="text-brand-blue">"projects_delivered"</span>: <span class="text-green-300">"15+"</span>,<br>
-                            &nbsp;&nbsp;<span class="text-brand-blue">"core_stack"</span>: [<span class="text-green-300">"Python"</span>, <span class="text-green-300">"GenAI"</span>, <span class="text-green-300">"PowerBI"</span>]<br>
+                            &nbsp;&nbsp;<span class="text-brand-blue">"core"</span>: [<span class="text-green-300">"Python"</span>, <span class="text-green-300">"SQL"</span>, <span class="text-green-300">"PowerBI"</span>],<br>
+                            &nbsp;&nbsp;<span class="text-brand-blue">"automation"</span>: [<span class="text-green-300">"n8n"</span>, <span class="text-green-300">"Twilio"</span>, <span class="text-green-300">"Apps Script"</span>],<br>
+                            &nbsp;&nbsp;<span class="text-brand-blue">"ai"</span>: [<span class="text-green-300">"RAG"</span>, <span class="text-green-300">"Gemini"</span>, <span class="text-green-300">"YOLO"</span>],<br>
+                            &nbsp;&nbsp;<span class="text-brand-blue">"status"</span>: <span class="text-green-300">"Open for Work"</span><br>
                             <span class="text-brand-yellow">}</span>
                         </div>
                         <div id="dynamic-logs"></div> 
@@ -150,76 +194,168 @@
         </div>
     </section>
 
-    <section id="stats" class="py-10 bg-white border-y border-slate-100">
+    <div class="bg-slate-900 py-4 overflow-hidden border-y border-slate-800">
+        <div class="whitespace-nowrap animate-marquee flex gap-12 text-slate-400 font-mono text-sm font-bold tracking-wider">
+            <span>PYTHON</span><span>SQL</span><span>POWERBI</span><span>MACHINE LEARNING</span><span>GENAI</span><span>N8N</span><span>TWILIO</span><span>FIREBASE</span><span>GOOGLE CLOUD</span><span>APPS SCRIPT</span><span>WEB SCRAPING</span><span>AUTOMATION</span><span>TABLEAU</span><span>FLASK</span><span>YOLO</span>
+            <span>PYTHON</span><span>SQL</span><span>POWERBI</span><span>MACHINE LEARNING</span><span>GENAI</span><span>N8N</span><span>TWILIO</span><span>FIREBASE</span><span>GOOGLE CLOUD</span><span>APPS SCRIPT</span><span>WEB SCRAPING</span><span>AUTOMATION</span><span>TABLEAU</span><span>FLASK</span><span>YOLO</span>
+        </div>
+    </div>
+
+    <section id="stats" class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="text-center reveal">
-                <h3 class="text-4xl font-bold text-brand-cyan">15+</h3>
-                <p class="text-sm text-slate-500 uppercase tracking-wider font-bold mt-2">Projects Delivered</p>
+            <div class="text-center p-6 bg-slate-50 rounded-2xl reveal hover:bg-slate-100 transition border border-slate-100">
+                <h3 class="text-4xl font-bold text-brand-cyan">10+</h3>
+                <p class="text-xs text-slate-500 font-bold font-mono mt-2 uppercase">Projects Deployed</p>
             </div>
-            <div class="text-center reveal delay-100">
+            <div class="text-center p-6 bg-slate-50 rounded-2xl reveal delay-100 hover:bg-slate-100 transition border border-slate-100">
                 <h3 class="text-4xl font-bold text-brand-blue">1.5+</h3>
-                <p class="text-sm text-slate-500 uppercase tracking-wider font-bold mt-2">Years Experience</p>
+                <p class="text-xs text-slate-500 font-bold font-mono mt-2 uppercase">Years Experience</p>
             </div>
-            <div class="text-center reveal delay-200">
+            <div class="text-center p-6 bg-slate-50 rounded-2xl reveal delay-200 hover:bg-slate-100 transition border border-slate-100">
                 <h3 class="text-4xl font-bold text-brand-orange">100%</h3>
-                <p class="text-sm text-slate-500 uppercase tracking-wider font-bold mt-2">Automation</p>
+                <p class="text-xs text-slate-500 font-bold font-mono mt-2 uppercase">Automation Focus</p>
             </div>
-            <div class="text-center reveal delay-300">
+            <div class="text-center p-6 bg-slate-50 rounded-2xl reveal delay-300 hover:bg-slate-100 transition border border-slate-100">
                 <h3 class="text-4xl font-bold text-brand-yellow">24/7</h3>
-                <p class="text-sm text-slate-500 uppercase tracking-wider font-bold mt-2">System Uptime</p>
+                <p class="text-xs text-slate-500 font-bold font-mono mt-2 uppercase">System Uptime</p>
             </div>
         </div>
     </section>
 
-    <section id="experience" class="py-20 bg-slate-50 relative z-10">
+    <section id="skills" class="py-20 bg-slate-50 relative z-10">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl font-bold mb-16 flex items-center gap-3 reveal">
-                <i class="fas fa-briefcase text-brand-cyan"></i> Professional <span class="text-gradient">Journey</span>
+                <i class="fas fa-layer-group text-brand-cyan"></i> Technical <span class="text-gradient">Arsenal</span>
             </h2>
 
-            <div class="space-y-12 border-l-2 border-slate-200 ml-4 pl-8 pb-12">
-                <div class="relative reveal">
-                    <span class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-cyan border-4 border-white shadow-lg"></span>
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <div class="flex justify-between flex-wrap gap-2 mb-4">
-                            <div><h3 class="text-xl font-bold text-slate-800">Data Science Analyst</h3><p class="text-brand-cyan font-semibold">Skope Kitchens</p></div>
-                            <span class="text-sm text-slate-500 font-mono">Mar 2025 - Present</span>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-cyan reveal tilt-card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-slate-800">Expert</h3>
+                        <i class="fas fa-check-circle text-brand-cyan text-2xl"></i>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>PYTHON & AUTOMATION</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-cyan skill-bar" data-width="100%"></div></div>
                         </div>
-                        <ul class="list-disc list-inside space-y-2 text-slate-600 text-sm">
-                            <li>Built an <b>AI Chatbot (Gemini + RAG)</b> that reduced manual query time by 90%.</li>
-                            <li>Automated vendor selection & PO generation using DotPe API.</li>
-                            <li>Created demand forecasting pipelines using <b>Prophet & ARIMA</b>.</li>
-                            <li>Developed real-time Looker Studio dashboards for ops tracking.</li>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>DATA ANALYSIS</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-cyan skill-bar" data-width="100%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>API INTEGRATION</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-cyan skill-bar" data-width="100%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>n8n / ZAPIER</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-cyan skill-bar" data-width="100%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-yellow reveal delay-100 tilt-card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-slate-800">Advanced</h3>
+                        <i class="fas fa-brain text-brand-yellow text-2xl"></i>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>MACHINE LEARNING</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-yellow skill-bar" data-width="90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>GENAI & LLMs</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-yellow skill-bar" data-width="90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>GCP & CLOUD</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-yellow skill-bar" data-width="85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>POWER BI</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-yellow skill-bar" data-width="90%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-orange reveal delay-200 tilt-card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-slate-800">Intermediate</h3>
+                        <i class="fab fa-js text-brand-orange text-2xl"></i>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>SQL & DATABASES</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-orange skill-bar" data-width="90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>JAVASCRIPT</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-orange skill-bar" data-width="75%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>EXCEL (Advanced)</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-orange skill-bar" data-width="85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2 text-slate-600"><span>TABLEAU</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-brand-orange skill-bar" data-width="80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 bg-white relative z-10 border-t border-slate-100">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-16 flex items-center gap-3 reveal">
+                <i class="fas fa-history text-brand-cyan"></i> Professional <span class="text-gradient">Timeline</span>
+            </h2>
+
+            <div class="space-y-8 relative border-l-2 border-slate-200 ml-3 md:ml-6 pl-8 md:pl-12">
+                <div class="relative reveal">
+                    <span class="absolute -left-[39px] md:-left-[55px] top-0 w-5 h-5 rounded-full bg-brand-cyan border-4 border-white shadow-md"></span>
+                    <div class="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100 hover:border-brand-cyan transition">
+                        <div class="flex flex-col md:flex-row justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">Data Science Analyst @ Skope Kitchens</h3>
+                            <span class="text-xs font-mono text-brand-cyan font-bold bg-white border border-cyan-100 px-2 py-1 rounded w-fit">Mar 2025 - Nov 2025</span>
+                        </div>
+                        <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 mt-4">
+                            <li>Built <b>RAG Chatbot</b> (Gemini) for instant CSV/PDF data querying.</li>
+                            <li>Automated vendor selection & POs using <b>DotPe API</b>.</li>
+                            <li>Designed <b>Prophet & ARIMA</b> forecasting pipelines.</li>
+                            <li>Created Virtual AI Calling Assistant (Dialogflow/Twilio).</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="relative reveal delay-100">
-                    <span class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-blue border-4 border-white shadow-lg"></span>
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <div class="flex justify-between flex-wrap gap-2 mb-4">
-                            <div><h3 class="text-xl font-bold text-slate-800">Data Analyst</h3><p class="text-brand-blue font-semibold">CENDROL CONSTRUCTIONS</p></div>
-                            <span class="text-sm text-slate-500 font-mono">Dec 2024 - Mar 2025</span>
+                    <span class="absolute -left-[39px] md:-left-[55px] top-0 w-5 h-5 rounded-full bg-brand-blue border-4 border-white shadow-md"></span>
+                    <div class="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100 hover:border-brand-blue transition">
+                        <div class="flex flex-col md:flex-row justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">Data Analyst @ Cendrol</h3>
+                            <span class="text-xs font-mono text-brand-blue font-bold bg-white border border-blue-100 px-2 py-1 rounded w-fit">Dec 2024 - Mar 2025</span>
                         </div>
-                        <ul class="list-disc list-inside space-y-2 text-slate-600 text-sm">
-                            <li>Developed <b>Tableau dashboards</b> for real-time decision-making.</li>
-                            <li>Improved data accuracy by 15% through SQL/Python cleaning.</li>
-                            <li>Conducted predictive analysis for sales trends.</li>
+                        <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 mt-4">
+                            <li>Developed <b>Tableau</b> dashboards for real-time insights.</li>
+                            <li>Improved data accuracy by 15% via SQL/Python cleaning.</li>
+                            <li>Reduced operational bottlenecks by 20% through analysis.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="relative reveal delay-200">
-                    <span class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-orange border-4 border-white shadow-lg"></span>
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <div class="flex justify-between flex-wrap gap-2 mb-4">
-                            <div><h3 class="text-xl font-bold text-slate-800">Data Scientist</h3><p class="text-brand-orange font-semibold">FlivoAI</p></div>
-                            <span class="text-sm text-slate-500 font-mono">Jun 2024 - Dec 2024</span>
+                    <span class="absolute -left-[39px] md:-left-[55px] top-0 w-5 h-5 rounded-full bg-brand-orange border-4 border-white shadow-md"></span>
+                    <div class="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100 hover:border-brand-orange transition">
+                        <div class="flex flex-col md:flex-row justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">Data Scientist @ FlivoAI</h3>
+                            <span class="text-xs font-mono text-brand-orange font-bold bg-white border border-orange-100 px-2 py-1 rounded w-fit">Jun 2024 - Dec 2024</span>
                         </div>
-                        <ul class="list-disc list-inside space-y-2 text-slate-600 text-sm">
-                            <li>Built <b>GenAI-powered assistants</b> (Health & Sales) using OpenAI API.</li>
-                            <li>Designed algorithms to process large datasets on AWS/GCP.</li>
-                            <li>Integrated Twilio for voice/SMS interactions.</li>
+                        <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 mt-4">
+                            <li>Built GenAI Health & Sales Assistants using OpenAI API.</li>
+                            <li>Optimized cloud pipelines on AWS/GCP for large datasets.</li>
+                            <li>Deployed Deep Learning models for defect detection.</li>
                         </ul>
                     </div>
                 </div>
@@ -227,122 +363,116 @@
         </div>
     </section>
 
-    <section id="flagship" class="py-20 bg-white relative z-10">
+    <section id="projects" class="py-20 bg-slate-50 relative z-10">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 flex items-center gap-3 reveal">
-                <i class="fas fa-star text-brand-yellow"></i> Flagship <span class="text-gradient">Initiatives</span>
+                <i class="fas fa-database text-brand-cyan"></i> Project <span class="text-gradient">Database</span>
             </h2>
 
-            <div class="grid lg:grid-cols-2 gap-8">
-                <div class="glass p-8 rounded-2xl border-t-4 border-brand-cyan shadow-lg tilt-card reveal">
-                    <h3 class="text-2xl font-bold mb-2">FoodTech AI Chatbot</h3>
-                    <p class="text-xs text-brand-cyan font-bold uppercase mb-4">Skope Kitchens | Jul 2025</p>
-                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
-                        To solve repetitive tasks like sales reporting, I developed a smart AI Chatbot powered by <b>Google’s Gemini LLM</b> & RAG. It provides instant responses, generates PDF/CSV reports, and assists with order management via Firebase.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Gemini LLM</span>
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">RAG</span>
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Firebase</span>
+            <div class="grid md:grid-cols-2 gap-8"> <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-blue-100 text-brand-blue rounded-lg"><i class="fas fa-robot text-xl"></i></div>
+                        <span class="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-1 rounded uppercase">Live</span>
                     </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-brand-blue transition">FoodTech AI Chatbot</h3>
+                    <p class="text-sm text-slate-600 mb-4">Gemini LLM + RAG system. Auto-generates sales reports (PDF/CSV) and answers queries via Firebase.</p>
+                    <div class="flex gap-2 text-[10px] font-bold text-slate-500 uppercase"><span class="bg-slate-50 px-2 py-1 rounded border">GenAI</span><span class="bg-slate-50 px-2 py-1 rounded border">RAG</span></div>
                 </div>
 
-                <div class="glass p-8 rounded-2xl border-t-4 border-brand-orange shadow-lg tilt-card reveal">
-                    <h3 class="text-2xl font-bold mb-2">Smart Automated FCR System</h3>
-                    <p class="text-xs text-brand-orange font-bold uppercase mb-4">Skope Kitchens | Mar 2025</p>
-                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
-                        A Real-Time Recipe Costing system. Centralized procurement rates update all sub-recipes recursively. Chef enters yield, and the system calculates batch/portion costs instantly. Zero manual errors.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Google Apps Script</span>
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Advanced Formulas</span>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-purple-100 text-purple-600 rounded-lg"><i class="fas fa-phone-volume text-xl"></i></div>
                     </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-purple-600 transition">AI Inbound Call Agent</h3>
+                    <p class="text-sm text-slate-600 mb-4">Built with <b>n8n & ElevenLabs</b>. Answers calls 24/7, books appointments, and syncs data instantly.</p>
+                    <div class="flex gap-2 text-[10px] font-bold text-slate-500 uppercase"><span class="bg-slate-50 px-2 py-1 rounded border">n8n</span><span class="bg-slate-50 px-2 py-1 rounded border">VoiceAI</span></div>
                 </div>
 
-                <div class="glass p-8 rounded-2xl border-t-4 border-brand-blue shadow-lg tilt-card reveal">
-                    <h3 class="text-2xl font-bold mb-2">GenAI Health & Sales Assistant</h3>
-                    <p class="text-xs text-brand-blue font-bold uppercase mb-4">FlivoAI | Jul 2024</p>
-                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
-                        Automated healthcare Q&A and sales workflows. Handles basic illness queries via GenAI, routes critical cases to doctors, and integrates with Twilio for voice/SMS interaction.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">OpenAI API</span>
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Twilio</span>
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">Flask</span>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-orange-100 text-brand-orange rounded-lg"><i class="fas fa-calculator text-xl"></i></div>
                     </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-brand-orange transition">Smart FCR System</h3>
+                    <p class="text-sm text-slate-600 mb-4">Real-time recipe costing. Updates sub-recipes recursively based on live market rates. Zero errors.</p>
+                    <div class="flex gap-2 text-[10px] font-bold text-slate-500 uppercase"><span class="bg-slate-50 px-2 py-1 rounded border">Apps Script</span><span class="bg-slate-50 px-2 py-1 rounded border">Python</span></div>
                 </div>
 
-                <div class="glass p-8 rounded-2xl border-t-4 border-purple-500 shadow-lg tilt-card reveal">
-                    <h3 class="text-2xl font-bold mb-2">Data Intelligence Pipeline</h3>
-                    <p class="text-xs text-purple-500 font-bold uppercase mb-4">Cendrol | Feb 2025</p>
-                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
-                        End-to-end pipeline: Google Sheets extraction -> SQL storage -> Python EDA -> LLM Chatbot. Allows users to query complex construction data intelligently.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">SQL</span>
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">EDA</span>
-                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded">NLP</span>
+                <a href="https://github.com/sachinbajaj4477/Blinkit-Data-Analysis" target="_blank" class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal cursor-pointer">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-yellow-100 text-brand-yellow rounded-lg"><i class="fas fa-chart-pie text-xl"></i></div>
+                        <i class="fab fa-github text-slate-400"></i>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-brand-yellow transition">E-Commerce Dashboard</h3>
+                    <p class="text-sm text-slate-600 mb-4">Interactive Power BI dashboard. KPIs for Sales, Profit, Payment Modes, and Category trends.</p>
+                    <div class="flex gap-2 text-[10px] font-bold text-slate-500 uppercase"><span class="bg-slate-50 px-2 py-1 rounded border">PowerBI</span><span class="bg-slate-50 px-2 py-1 rounded border">DAX</span></div>
+                </a>
 
-    <section id="analytics" class="py-20 bg-slate-50 relative z-10">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3 reveal">
-                <i class="fas fa-chart-pie text-brand-cyan"></i> Analytics & <span class="text-gradient">Research</span>
-            </h2>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
-                    <i class="fas fa-chart-bar text-brand-yellow text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">E-Commerce Sales Dashboard</h3>
-                    <p class="text-sm text-slate-600 mb-4">Power BI dashboard analyzing KPIs, state-wise performance, and profit trends. <b>Skills:</b> DAX, Power Query.</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-blue-100 text-blue-800 rounded-lg"><i class="fas fa-database text-xl"></i></div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-blue-800 transition">Data Intel Pipeline</h3>
+                    <p class="text-sm text-slate-600 mb-4">End-to-end flow: Google Sheets -> SQL -> Python EDA -> LLM Chatbot for intelligent querying.</p>
+                    <div class="flex gap-2 text-[10px] font-bold text-slate-500 uppercase"><span class="bg-slate-50 px-2 py-1 rounded border">SQL</span><span class="bg-slate-50 px-2 py-1 rounded border">EDA</span></div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
-                    <i class="fas fa-phone-volume text-brand-blue text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">AI Inbound Call Automation</h3>
-                    <p class="text-sm text-slate-600 mb-4">Built using <b>n8n & ElevenLabs</b>. Answers calls 24/7, books appointments, and captures details automatically.</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-red-100 text-red-600 rounded-lg"><i class="fas fa-search-plus text-xl"></i></div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-red-600 transition">Fabric Defect Detection</h3>
+                    <p class="text-sm text-slate-600 mb-4">Computer Vision model (YOLOv4/CNN) identifying textile defects with <b>93% recall</b>.</p>
+                    <div class="flex gap-2 text-[10px] font-bold text-slate-500 uppercase"><span class="bg-slate-50 px-2 py-1 rounded border">YOLO</span><span class="bg-slate-50 px-2 py-1 rounded border">Deep Learning</span></div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
-                    <i class="fas fa-search-plus text-red-500 text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Fabric Defect Detection</h3>
-                    <p class="text-sm text-slate-600 mb-4">Deep Learning model (YOLOv4/CNN) identifying textile defects with <b>93% recall</b>. Used at FlivoAI.</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-pink-100 text-pink-600 rounded-lg"><i class="fab fa-instagram text-xl"></i></div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-pink-600 transition">Instagram Growth Analysis</h3>
+                    <p class="text-sm text-slate-600 mb-4">Analyzed post types and timing using Python (Pandas/Seaborn) to maximize engagement.</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
-                    <i class="fab fa-instagram text-pink-500 text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Instagram Data Analysis</h3>
-                    <p class="text-sm text-slate-600 mb-4">Analyzed engagement metrics (Reels vs Images) using Python (Pandas/Seaborn) to optimize content strategy.</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-green-100 text-green-600 rounded-lg"><i class="fas fa-taxi text-xl"></i></div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-green-600 transition">Dynamic Ride Pricing</h3>
+                    <p class="text-sm text-slate-600 mb-4">ML models (Random Forest, XGBoost) to predict ride costs in real-time based on demand.</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
-                    <i class="fas fa-taxi text-brand-orange text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Ride-Hailing Dynamic Pricing</h3>
-                    <p class="text-sm text-slate-600 mb-4">Predicting ride costs using Random Forest & XGBoost. Real-time pricing strategy optimization.</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-yellow-100 text-yellow-700 rounded-lg"><i class="fas fa-utensils text-xl"></i></div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-yellow-700 transition">Ingredient Cost Calc</h3>
+                    <p class="text-sm text-slate-600 mb-4">Dynamic tool mapping ingredients to market prices & unit conversions for accurate food costing.</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
-                    <i class="fas fa-carrot text-green-500 text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Ingredient Consumption Tool</h3>
-                    <p class="text-sm text-slate-600 mb-4">Google Apps Script tool that maps ingredients to market prices and calculates costs based on dish sales.</p>
-                </div>
-
-                 <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
-                    <i class="fas fa-heartbeat text-red-400 text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Fitness Watch Analysis</h3>
-                    <p class="text-sm text-slate-600 mb-4">Analyzed smartwatch data (steps, energy burned) to understand health patterns using Python EDA.</p>
-                </div>
-
-                 <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition border border-slate-100 tilt-card reveal">
-                    <i class="fas fa-subway text-blue-800 text-3xl mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Delhi Metro Network Analysis</h3>
+                 <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-slate-200 text-slate-700 rounded-lg"><i class="fas fa-subway text-xl"></i></div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-slate-900 transition">Metro Network Analysis</h3>
                     <p class="text-sm text-slate-600 mb-4">Geospatial mapping and route optimization for the Delhi Metro system to reduce congestion.</p>
                 </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-blue-50 text-blue-500 rounded-lg"><i class="fas fa-notes-medical text-xl"></i></div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-blue-500 transition">Diabetes Prediction ML</h3>
+                    <p class="text-sm text-slate-600 mb-4">Predictive analytics on health data to identify diabetes risk factors with high accuracy.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:border-brand-cyan transition group tilt-card reveal">
+                    <div class="flex justify-between mb-4">
+                        <div class="p-2 bg-red-50 text-red-500 rounded-lg"><i class="fas fa-heartbeat text-xl"></i></div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-red-500 transition">Fitness Watch Analysis</h3>
+                    <p class="text-sm text-slate-600 mb-4">EDA on smartwatch data (steps, energy burned) to uncover user activity patterns.</p>
+                </div>
+
             </div>
         </div>
     </section>
@@ -367,6 +497,7 @@
     </a>
 
     <script>
+        // 1. Diagnostics Script
         function runDiagnostics() {
             const logs = document.getElementById('dynamic-logs');
             const btn = document.querySelector('button[onclick="runDiagnostics()"]');
@@ -376,7 +507,7 @@
 
             const steps = [
                 { msg: "Scanning skills: Python, SQL, PowerBI found...", color: "text-slate-400", delay: 500 },
-                { msg: "Loading 15+ Projects...", color: "text-brand-cyan", delay: 1000 },
+                { msg: "Loading 10+ Projects...", color: "text-brand-cyan", delay: 1000 },
                 { msg: "Verifying Experience: 1.5+ Years...", color: "text-brand-yellow", delay: 1800 },
                 { msg: "System Ready. Open for Hire.", color: "text-green-400 font-bold", delay: 2800 }
             ];
@@ -398,7 +529,7 @@
             }, cumulativeDelay + 500);
         }
 
-        // Particle System
+        // 2. Particle System
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -443,12 +574,39 @@
         }
         animate();
 
-        // Reveal on Scroll
+        // 3. Reveal on Scroll
         window.addEventListener('scroll', () => {
             document.querySelectorAll('.reveal').forEach(reveal => {
                 if (reveal.getBoundingClientRect().top < window.innerHeight - 100) reveal.classList.add('active');
             });
         });
+
+        // 4. Mobile Menu
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 5. Remove Boot Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('boot-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('boot-screen').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // 6. Skill Bar Animation
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.width = entry.target.getAttribute('data-width');
+                }
+            });
+        });
+        document.querySelectorAll('.skill-bar').forEach(el => skillObserver.observe(el));
     </script>
 </body>
 </html>
